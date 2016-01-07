@@ -11,7 +11,9 @@ class Migration_Session_Table extends CI_Migration {
       'KEY ci_sessions_timestamp (timestamp)'
     );
     $this->dbforge->add_field($fields);
-    $this->dbforge->create_table('ci_sessions'); 
+
+    $this->dbforge->create_table('ci_sessions');
+    $this->db->query("ALTER TABLE ci_sessions ADD PRIMARY KEY (id, ip_address)");
 	}
   public function down()
   {

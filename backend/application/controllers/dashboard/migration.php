@@ -16,7 +16,7 @@ class Migration extends CI_Controller {
             echo "There was a error migration worked";
         } else {
 
-        /*    echo "<center>the migration worked";
+            echo "<center>the migration worked";
             $this->load->helper('file');
             // $config_file_URL =  base_url().'config.txt';
             $config_file_URL = './config.txt';
@@ -30,12 +30,12 @@ class Migration extends CI_Controller {
 
             $hashpass = $this->usermodel->hash($converted[5]);
             $datatoinsert = array(
-                'last_name' => $converted[0],
-                'first_name' => $converted[1],
-                'email' => $converted[2],
-                'username' => $converted[3],
-                'user_type' => $converted[4],
-                'password' => $hashpass
+                'last_name' => trim($converted[0]),
+                'first_name' => trim($converted[1]),
+                'email' => trim($converted[2]),
+                'username' =>trim($converted[3]),
+                'user_role' =>trim($converted[4]) ,
+                'password' =>trim($hashpass)
             );
 
             $id = 1;
@@ -43,12 +43,11 @@ class Migration extends CI_Controller {
             $check_admin_zero = $this->usermodel->get($id);
 
             if (count($check_admin_zero)) {
-                echo "<br/>*******************************<br/>";
+                echo "<br/>**************************<br/>";
                 echo "*******************************<br/>";
                 echo "* SUPER ADMINISTRATOR CREATED *<br/>";
                 echo "***** You can now login   *****<br/>";
-                echo anchor("dashboard/users/login", "USER LOGIN");
-                echo "<br>*******************************<br/>";
+                echo "<br>***************************<br/>";
            //     if (unlink($config_file_URL)) {
            //         echo 'deleted successfully ';
            //     } else {
@@ -62,11 +61,9 @@ class Migration extends CI_Controller {
                 $this->usermodel->save($datatoinsert);
                 echo "PROCESSING DONE<br/>";
 
-                echo 'ADMINISTRATOR SUCCESS FULLY CREATED<br>';
+                echo 'ADMINISTRATOR SUCCESSFULLY CREATED<br>';
             }
-            echo '</center>';*/
-        
-            echo "the migration worked";
+            echo '</center>';
         }
     }
 

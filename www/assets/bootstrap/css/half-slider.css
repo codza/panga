@@ -1,0 +1,12 @@
+.carousel {
+	height:50%;
+}
+
+.item,
+.active,
+.carousel-inner {
+	height:100%;
+}
+
+
+

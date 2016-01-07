@@ -1,6 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+function __autoload($classname) {
+    if (strpos($classname, 'CI_') !== 0) {
+        $file = APPPATH . 'libraries/' . $classname . '.php';
+        if (file_exists($file) && is_file($file)) {
+            @include_once($file);
+        }
+    }
+}
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -23,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/02_BASE/panga/www/admin/';
+$config['base_url'] = 'http://localhost/02_BASE/panga/www/';
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +46,7 @@ $config['base_url'] = 'http://localhost/02_BASE/panga/www/admin/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -314,7 +325,7 @@ $config['cache_query_string'] = FALSE;
 | http://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'M1Y2N3A4M5E6I7S8N9O0N!E@O#F$Y%O^U&R*BUSINESS';
 
 /*
 |--------------------------------------------------------------------------
@@ -367,13 +378,18 @@ $config['encryption_key'] = '';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
+
+
+
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'cisession';
+$config['sess_encrypt_cookie']  = TRUE;
 $config['sess_expiration'] = 7200;
 $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
+
 
 /*
 |--------------------------------------------------------------------------
