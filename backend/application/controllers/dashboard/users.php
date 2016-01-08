@@ -10,8 +10,9 @@ class Users extends Admin_Controller {
     }
 
     public function index() {
+        $ids = array($this->userSession->user_id,1);
 
-        $this->data['users'] = $this->usermodel->get();
+        $this->data['users'] = $this->usermodel->getAllButCurrentUser($ids);
         $this->data['subview'] = 'dashboard/user/_user_list';
         $this->load->view('dashboard/_main_layout', $this->data);
 
@@ -114,7 +115,7 @@ class Users extends Admin_Controller {
 
 
 
-            //$rules['Email']['rules'] = 'trim|required|edit_unique[tbl_user.email.' . $email . ']';
+          //  $rules['Email']['rules'] = 'trim|required|edit_unique[tbl_user.email.' . $email . ']';
 
             $this->load->library('form_validation');
             $this->form_validation->set_rules($rules);
@@ -200,6 +201,14 @@ class Users extends Admin_Controller {
         }
 
         return TRUE;
+    }
+
+    public function edit_unique($value, $params)
+    {
+        $this->set_message('edit_unique', "This %s is already in use!".$params." 000".$value );
+        list($table, $field, $current_id) = explode(".", $params);
+        $result = $this->CI->db->where($field, $value)->get($table)->row();
+        return ($result && $result->user_id != $current_id) ? FALSE : TRUE;
     }
 
 

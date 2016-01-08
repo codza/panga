@@ -11,7 +11,17 @@ class MY_Form_validation extends CI_Form_validation {
     }
     // add more function to apply custom rules.
    ///$this->form_validation->set_rules('name', 'Name', edit_unique[users.name.'. $user_id .']);
-    public function edit_unique($value, $params)
+    function edit_unique($value, $params)
+    {
+
+        list($table, $field, $current_id) = explode(".", $params);
+        $result = $this->CI->db->where($field, $value)->get($table)->row();
+        $this->set_message('edit_unique', "This %s is already in use! ". $current_id." == ".$result->user_id."||".$table." -> ".$field." -> ".$params." -> ".$value);
+        return ($result && $result->user_id != $current_id) ? FALSE : TRUE;
+
+    }
+
+ /*   public function edit_unique($value, $params)
     {
         $CI =& get_instance();
         $CI->load->database();
@@ -26,7 +36,7 @@ class MY_Form_validation extends CI_Form_validation {
         {
             return FALSE;
         }
-    }
+    }*/
 
 
 

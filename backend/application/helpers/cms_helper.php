@@ -10,19 +10,15 @@ function a_edit_profil($uri, $link_labal) {
 }
 
 function btn_add($uri, $name) {
-    return anchor($uri, '<span class="glyphicon glyphicon-plus"></span> Create ' . $name, 'title="Create ' . $name . '"');
-}
-
-function video_link($uri) {
-    return anchor($uri, '<span class="glyphicon glyphicon-play-circle"></span>play');
+    return anchor($uri, '<span class="glyphicon glyphicon-plus"></span> Create New ' . $name, 'title="Create ' . $name . '"');
 }
 
 function btn_edit($uri) {
-    return anchor($uri, '<span class="glyphicon glyphicon-edit"></span>Modifier');
+    return anchor($uri, '<span class="glyphicon glyphicon-edit"></span> Edit');
 }
 
 function btn_delete($uri) {
-    return anchor($uri, '<span class="glyphicon glyphicon-remove"></span>Supprimer', array(
+    return anchor($uri, '<span class="glyphicon glyphicon-remove"></span> Delete', array(
         'onclick' => "return confirm('Vous allez supprimer cette vid&eacute;. Cette action ne peux &ecirc;tre annul&eacute;e. Confirmer ?');"
     ));
 }

@@ -19,18 +19,21 @@ class Categories extends Admin_Controller {
 
     public function create() {
         $categoryname = "";
-      
+        $categorydescription ="";
         $datatoinsert = array(
-            "category_name" => $categoryname
+            "category_name"=>$categoryname,
+            "category_description"=>$categorydescription
         );
         $this->data["datatoinsert"] = $datatoinsert;
 
-        if ($_POST) {
-           
-            $categoryname = $this->input->post('categoryname', true);
-          
+        if($_POST){
+            $user_id = 1;
+            $categoryname = $this->input->post('categoryname',true);
+            $categorydescription = $this->input->post('categorydescription',true);
             $datatoinsert = array(
-                "category_name" => $categoryname
+                "user_id"             => $user_id,
+                "category_name"       => $categoryname,
+                "category_description"=>$categorydescription
             );
             $this->data["datatoinsert"] = $datatoinsert;
             $this->load->library('form_validation');
@@ -38,17 +41,17 @@ class Categories extends Admin_Controller {
 
             $this->form_validation->set_rules($validationrules);
 
-            if ($this->form_validation->run() == FALSE) {
+            if ($this->form_validation->run() == FALSE){
                 //  $this->load->view('myform');
-            } else {
+            }else{
 
                 $this->categorymodel->save($datatoinsert);
-                redirect('dashboard/categories/', 'refresh');
+                redirect('dashboard/categories/','refresh');
             }
         }
-        // var_dump();
-        $this->data['subview'] = "dashboard/category/_new_category";
-        $this->load->view("dashboard/_main_layout", $this->data);
+
+        $this->data['subview']="dashboard/category/_new_category";
+        $this->load->view("dashboard/_main_layout",$this->data);
     }
 
     public function edit($id = NULL) {
@@ -58,7 +61,7 @@ class Categories extends Admin_Controller {
         if ($_POST) {
             $catid = $this->input->post('categoryid', true);
             $categoryname = $this->input->post('categoryname', true);
-        //    $categorydescription = $this->input->post('categorydescription', true);
+            $categorydescription = $this->input->post('categorydescription', true);
             $this->load->library('form_validation');
             $validationrules = $this->categorymodel->rules;
 
@@ -81,7 +84,7 @@ class Categories extends Admin_Controller {
             } else {
                 $datatoupdate = array(
                     "category_name" => $categoryname,
-            //        "category_description" => $categorydescription
+                    "category_description" => $categorydescription
                 );
                 $this->categorymodel->save($datatoupdate, $catid);
                 // $this->data['category'] = $this->categorymodel->get($id);

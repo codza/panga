@@ -12,6 +12,22 @@ class UserModel extends MY_Model {
         parent::__construct();
 
     }
+    public function get($id = NULL, $single = FALSE){
+        return parent::get($id,$single);
+    }
+    function getAllButCurrentUser($ids=array('1')){
+        /*
+         $this->data['users'] = $this->usermodel->get_by(array(
+         "user_id NOT IN(".implode(", ", $ids).") "=>NULL ,
+            // $this->_table_name.".".$this->_primary_key." != "=>$id
+             ),
+                 FALSE);
+        */
+        $this->db->where_not_in($this->_table_name.".".$this->_primary_key, $ids);
+        $users = parent::get();
+       //  echo "<spam>".$this->db->last_query()."</spam>";
+        return $users;
+    }
     
     function getUserByEmail($email){
         $userAuth = null;
@@ -108,6 +124,7 @@ class UserModel extends MY_Model {
     public function hash($string) {
         return hash('sha256', $string.config_item('encryption_key'));
     }
+
 
 
 

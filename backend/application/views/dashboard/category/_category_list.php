@@ -1,5 +1,7 @@
-<?php  echo btn_add('dashboard/categories/create', 'Category');?>
-<hr>
+
+        <?php  echo btn_add('dashboard/categories/create', 'Category');?>
+
+		<hr>
 <table class="table">
 	<thead>
 		<tr>
@@ -12,7 +14,7 @@
 <?php foreach($categories as $category):?>
 		<tr>
 			<td><?php echo $category->category_name;?></td>
-			<td></td>
+			<td><?php echo $category->category_description;?></td>
 
 			<td> 
 			<?php echo btn_edit('dashboard/categories/edit/'. $category->category_id ); ?> |
