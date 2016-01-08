@@ -2,12 +2,12 @@
     <section class="navbar navbar-inverse">
         <div class="collapse navbar-collapse" id="">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo site_url('dashboard/');?>">Home</a></li>
-                <li><a href="<?php echo site_url('dashboard/users'); ?>">User</a></li>
-                <li><a href="<?php echo site_url('dashboard/categories'); ?>">Category</a></li>
-                <li><a href="<?php echo site_url('dashboard/posts'); ?>">Post</a></li>
-                <li><a href="<?php echo site_url('dashboard/medias'); ?>">Media</a></li>
-                <li><a href="<?php echo site_url('dashboard/posts/order'); ?>">Order Posts</a></li>
+                <li class=""><a href="<?php echo site_url('dashboard/users');?>">Home</a></li>
+                <li class="<?php echo (strcmp(uri_string(),"dashboard/users") ==0) ?"active":""; ?>"><a href="<?php echo site_url('dashboard/users'); ?>">User</a></li>
+                <li class="<?php echo (strcmp(uri_string(),"dashboard/categories") ==0) ?"active":""; ?>"><a href="<?php echo site_url('dashboard/categories'); ?>">Category</a></li>
+                <li class="<?php echo (strcmp(uri_string(),"dashboard/posts") ==0) ?"active":""; ?>"><a href="<?php echo site_url('dashboard/posts'); ?>">Post</a></li>
+                <li class="<?php echo (strcmp(uri_string(),"dashboard/medias") ==0) ?"active":""; ?>"><a href="<?php echo site_url('dashboard/medias'); ?>">Media</a></li>
+                <li class="<?php echo (strcmp(uri_string(),"dashboard/posts/order") ==0) ?"active":""; ?>"><a href="<?php echo site_url('dashboard/posts/order'); ?>">Order Posts</a></li>
             </ul>
             <!-- nav -->
             <!-- the left side of the nav bar -->

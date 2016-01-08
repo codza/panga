@@ -20,10 +20,15 @@ class MediaModel extends MY_Model {
 		/* $this->db->join('tbl_media media'," $this->_table_name.post_id = media.post_id", "left");*/
 		//$this->db->group_by("$this->_table_name.post_id");
 		return parent::get($id, $single);
-
-
-
 	}
+
+	public $rules = array(
+		'MediaName' => array(
+			'field' => 'medianame',
+			'label' => 'Media Name',
+			'rules' => 'trim|required'
+		)
+	);
 
 
 

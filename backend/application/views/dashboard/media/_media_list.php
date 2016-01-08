@@ -23,8 +23,8 @@
 
 
 				<div>
-					<?php echo btn_edit('admin/images/edit/'. $image->media_id ); ?> |
-					<?php echo btn_delete('admin/images/delete/'. $image->media_id); ?>
+					<?php echo btn_edit('dashboard/medias/edit/'. $image->media_id ); ?> |
+					<?php echo btn_delete('dashboard/medias/delete/'. $image->media_id); ?>
 				</div>
 			</div>
 

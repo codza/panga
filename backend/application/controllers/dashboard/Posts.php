@@ -292,7 +292,7 @@ class Posts extends Admin_Controller {
 
             $media_code = $data['upload_data']['raw_name'];
             $media_type = $data['upload_data']['file_type'];
-            $media_ext = $data['upload_data']['file_ext'];
+            $media_ext  = $data['upload_data']['file_ext'];
             $media_size = $data['upload_data']['file_size'];
             $media_name = basename($data['upload_data']['client_name'],$media_ext);
 

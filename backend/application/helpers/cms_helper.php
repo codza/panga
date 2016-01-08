@@ -5,21 +5,21 @@ function add_meta_title($string) {
     $CI->data['meta_title'] = e($string) . ' - ' . $CI->data['meta_title'];
 }
 
-function a_edit_profil($uri, $link_labal) {
-    return anchor($uri, '<span class="glyphicon glyphicon-edit"></span>' . $link_labal);
+function a_edit_profil($uri, $label) {
+    return anchor($uri, '<span class="glyphicon glyphicon-edit"></span>' . $label);
 }
 
-function btn_add($uri, $name) {
-    return anchor($uri, '<span class="glyphicon glyphicon-plus"></span> Create New ' . $name, 'title="Create ' . $name . '"');
+function btn_add($uri, $label="New") {
+    return anchor($uri, '<span class="glyphicon glyphicon-plus"></span>'. $label, 'title="' . $label . '"');
 }
 
-function btn_edit($uri) {
-    return anchor($uri, '<span class="glyphicon glyphicon-edit"></span> Edit');
+function btn_edit($uri ,$label="Edit") {
+    return anchor($uri, '<span class="glyphicon glyphicon-edit"></span> '.$label, 'title="' . $label . '"');
 }
 
-function btn_delete($uri) {
+function btn_delete($uri, $entity="record") {
     return anchor($uri, '<span class="glyphicon glyphicon-remove"></span> Delete', array(
-        'onclick' => "return confirm('Vous allez supprimer cette vid&eacute;. Cette action ne peux &ecirc;tre annul&eacute;e. Confirmer ?');"
+        'onclick' => "return confirm('You are about to delete a ".$entity.". This cannot be undone. Are you sure?');"
     ));
 }
 
