@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/jquery-ui-1.11.0/css/jquery-ui.min.css'); ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/bootstrap/css/bootstrap-datepicker.css'); ?>" />
 
-
+    <link rel="stylesheet" type="text/css" href="<?php echo site_url('backend/css/admin.css'); ?>" >
 
 
     <!-- ############################################ -->
@@ -27,7 +27,7 @@
 
     <!-- Place inside the <head> of your HTML -->
 
-        <link href="<?php echo site_url('css/admin.css'); ?>" rel="stylesheet">
+
 
 
 

@@ -1,0 +1,12 @@
+<?php
+    $this->load->view('web/components/page_header');
+?>
+<?php
+    $this->load->view('web/components/nav_bar');
+?>
+<?php
+    $this->load->view($subview);
+?>
+<?php
+    $this->load->view('web/components/page_footer');
+?>

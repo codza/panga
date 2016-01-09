@@ -11,21 +11,22 @@ class PostModel extends MY_Model {
 	
 	function __construct() {
 		parent::__construct();
-        $this->load->model('categorymodel');
-        $this->load->model('mediamodel');
+        $this->load->model('dashboard/categorymodel');
+        $this->load->model('dashboard/mediamodel');
 
 	}
     public function get($id = null , $single = FAlSE){
         $this->db->select("$this->_table_name.* , us.first_name , us.last_name , us.username , cat.category_name");
         $this->db->join('tbl_category cat'," $this->_table_name.category_id = cat.category_id","LEFT");
-        $this->db->join('tbl_user us'," $this->_table_name.user_id = us.user_id");
+        $this->db->join('tbl_user us'," $this->_table_name.user_id = us.user_id", "LEFT");
         $this->db->group_by("$this->_table_name.post_id","LEFT");
         $posts =  parent::get($id, $single);
-      //$posts->{"images"}= array();
-     if(is_array($posts) == FALSE ){
-            $images = $this->mediamodel->get_by(array("tbl_media.post_id"=> $posts->post_id));
+   //   $posts->{"images"}= array();
+     if( !is_array($posts)  ){
+            $images = $this->mediamodel->get_by(array(
+                "tbl_media.post_id" => $posts->post_id),TRUE);
             $posts->{'images'}= $images;
-        }else if(is_array($posts) == TRUE ){
+        }else if(is_array($posts) ){
             foreach($posts as $i=> $post) {
                 $images = $this->mediamodel->get_by(array("tbl_media.post_id"=>$post->post_id));
                 $post->{"images"}= $images;

@@ -1,0 +1,373 @@
+html, body {
+
+    width:100%;
+    /*height:100%;*/
+    background-color: #F5F5F5;
+/*    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+    font-family: "Noto Serif", "Times New Roman",  serif;
+
+}
+.rhu-logo{
+    height:50px;
+}
+.rhu-reset-pm{
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+.main-content{
+
+    background-color: #ebe6e5;
+   /* height: 100%;*/
+    min-width:90%;
+
+   /* min-height:100%;*/
+    margin: 0px auto;
+}
+
+#rhu_navbar {
+    padding-right: 45px;
+    padding-left: 45px;
+ /*   position: absolute;
+    bottom: 0;
+    right: 0;*/
+}
+
+.rhu_navbar_header{
+
+}
+.rhu_navbar {
+    background: #a14535;
+    height: 50px;
+    margin: auto auto 0px auto;
+    padding: 0px 0px 0px 0px;
+    border: none;
+    border-radius: 0px;
+}
+/*.rhu_navbar_brand {
+    float: none;
+    height: 100%;
+    padding: 0px 15px;
+
+}*/
+.navbar-header a.rhu_navbar_brand {
+   /* float: none;*/
+    font-weight: bold;
+    word-spacing: 1px;
+    font-size:22px;
+    height: 100%;
+    padding: 0px 15px;
+    color: #fff;
+}
+.navbar-header a.rhu_navbar_brand:hover{
+    /* float: none;*/
+    font-weight: bold;
+    font-size:22px;
+    height: 100%;
+    padding: 0px 15px;
+    color: #c89381;
+}
+.rhu_post{
+    text-align: justify;
+    min-height: 100%;
+    height: 100%;
+}
+.rhu_post_card{
+    font-size:18px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 5px 0px 5px 0px;
+    padding: 5px 35px 5px 0px;
+   /* padding: 5px 0px 5px 0px;*/
+}
+.rhu_post_card h1{
+    font-size: 45px;
+    font-weight: bold;
+}
+
+
+
+.rhu_post_card h2{
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.rhu_post_card:hover{
+    background-color: #f6f6f6;
+    -moz-box-shadow: inset 0px 0px 5px 0px #656565;
+    -webkit-box-shadow: inset 0px 0px 5px 0px #656565;
+    -o-box-shadow: inset 0px 0px 5px 0px #656565;
+    box-shadow: inset 0px 0px 5px 0px #656565;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=NaN, Strength=5);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+.rhu_post_card p {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+
+}
+
+.rhu_post_card p:last-child{
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+
+}
+.rhu_post_view{
+    font-size:18px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 5px 0px 5px 0px;
+    padding: 5px 10px 5px 10px;
+    /* padding: 5px 0px 5px 0px;*/
+}
+.rhu_post_view h1{
+    font-size: 45px;
+    font-weight: bold;
+}
+.rhu_post_view h1:first-letter{
+    text-transform: capitalize;
+}
+
+.rhu_post_view h2{
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+.rhu_sidebar{
+    min-height: 100%;
+    height: 100%;
+}
+.rhu_related_posts{
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 5px 0px 5px 0px;
+
+}
+.rhu_related_posts h4:first-letter{
+    text-transform: capitalize;
+}
+
+
+.rhu_single_post_card{
+    font-size:18px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 5px 0px 5px 0px;
+    padding: 0px 20%;
+}
+
+.rhu_post_card h1:first-letter{
+    text-transform: capitalize;
+}
+.col-md-12 h1:first-letter{
+    text-transform: capitalize;
+}
+
+.rhu_media_container{
+    padding: 5px 0px 5px 0px;
+    height: 350px;
+}
+.rhu_media_container_1{
+    padding: 0px 0px 0px 0px;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+}
+/*.rhu_image{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+}*/
+
+.rhu-overview-container{
+    margin: 0px 0px 0px 0px;
+    padding: 5px 10px 5px 10px;
+
+    background-color: #ebe6e5;
+
+}
+.rhu-post-container{
+    margin: 5px auto 5px auto;
+    padding: 5px 10px 5px 10px;
+
+    background-color: #fff;
+
+}
+
+#rhu-Carousel{
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    height: 400px;
+}
+.carousel-caption h1{
+    font-weight: bold;
+
+}
+.carousel-caption a{
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+}
+.carousel-caption a:hover {
+    font-weight: bold;
+    text-decoration: none;
+    color: #E6E6E6;
+}
+
+.carousel-caption h1:first-letter{
+text-transform: uppercase;
+}
+
+.carousel-caption p{
+    font-size:20px;
+}
+
+
+.rhu_post_intro h2 a {
+
+    display: inline-block;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+}
+
+.rhu_post_intro a:last-child{
+    text-decoration: none;
+    color: #000;
+}
+.rhu_post_intro a:hover:last-child{
+    text-decoration: none;
+}
+
+.rhu_post_intro h2 a:first-letter{
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.rhu_staff_members h5{
+    font-weight: bold;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav>li>a:first-letter {
+    text-transform: uppercase;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #ffffff;
+    font-weight: bold;
+}
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #c89381;
+    font-weight: bold;
+}
+.navbar-inverse .navbar-nav>li.active >a , .navbar-inverse .navbar-nav>li.active >a:hover {
+    color: #c9bf99;
+    font-weight: bold;
+    background-color: rgba(8, 8, 8, 0);
+}
+.rhu_thumbnail{
+    border: none;
+    padding: 0px;
+
+    margin: 0px auto 0px auto;
+    background-color: transparent;
+    border-radius: 0px;
+    width: 187.5px;
+    height: 117.5px;
+
+}
+.rhu_image_thumbnail{
+border-radius: 5px;
+}
+
+/* link style*/
+
+
+/* here goes the footer cascading style sheet*/
+#footer {
+
+    background-color: #2f2f2f;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#footer h4 {
+    color: white;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+}
+
+
+#footer p {
+    color: #c9bf99;
+    margin-bottom: 0px;
+    font-size: 16px;
+}
+
+#footer p a {
+    display: inline-block;
+    color: #c9bf99;
+    margin-bottom: 0px;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+#footer p a.rhu_nav_footer:first-letter {
+    text-transform: capitalize;
+}
+
+#footer p a:hover {
+    color: #c89381;
+    margin-bottom: 0px;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+#footer .rhu_social{
+
+}
+
+
+
+#footer div.rhu_date_footer p {
+    color: #ffffff;
+}
+
+
+/*page 404*/
+#rhu_error{
+    display: block;
+    height: 100%;
+    min-height: 100%;
+}
+
+.error-template {padding: 40px 15px;text-align: center;}
+span.error-number {
+    display: block;
+    font-size:122px;
+    padding: 0px 0px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+span.error-message {
+    display: block;
+    font-size:72px;
+}
+span.error-details{
+    text-align: justify;
+    font-size:25px;
+}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }
+
+/*page 404*/
+
+.fill {
+    width:100%;
+    height:100%;
+    background-position: center;
+    background-size: cover;
+}
