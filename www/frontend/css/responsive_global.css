@@ -1,0 +1,16 @@
+@media screen and (max-width: 960px) {
+    .navbar {
+        z-index: 1000;
+
+    }
+
+    .navbar-header a.rhu_navbar_brand {
+
+        font-weight: bold;
+        word-spacing: 1px;
+        font-size: 22px;
+        height: 100%;
+        padding: 15px 0px;
+        color: #fff;
+    }
+}
