@@ -22,11 +22,11 @@ class PostModel extends MY_Model {
         $this->db->group_by("$this->_table_name.post_id","LEFT");
         $posts =  parent::get($id, $single);
    //   $posts->{"images"}= array();
-     if( !is_array($posts)  ){
+     if( !is_array($posts) && !is_null($posts) ){
             $images = $this->mediamodel->get_by(array(
                 "tbl_media.post_id" => $posts->post_id),TRUE);
             $posts->{'images'}= $images;
-        }else if(is_array($posts) ){
+        }else if(is_array($posts) && !is_null($posts) ){
             foreach($posts as $i=> $post) {
                 $images = $this->mediamodel->get_by(array("tbl_media.post_id"=>$post->post_id));
                 $post->{"images"}= $images;
@@ -91,11 +91,12 @@ class PostModel extends MY_Model {
 
 
     public function get_primary_posts(){
-        return $menu = $this->get_by( array(
+        $menu = $this->get_by( array(
         "$this->_table_name.post_type" => "primary_page",
         "$this->_table_name.is_active" => '1'
         ),FALSE);
-
+        // echo "<pre>".$this->db->last_query()."</pre>";
+        return $menu;
     }
 
 
@@ -125,7 +126,9 @@ class PostModel extends MY_Model {
         $this->db->limit($np);
         $this->db->order_by('created_date', 'DESC');
 
-        return  $this->get_by(array("$this->_table_name.post_type" => 'secondary_page',"$this->_table_name.is_active" => '1'), FALSE);
+        return  $this->get_by(array(
+            "$this->_table_name.post_type" => 'secondary_page',"$this->_table_name.is_active" => '1'),
+            FALSE);
     }
 
 
@@ -164,6 +167,25 @@ class PostModel extends MY_Model {
             'field' => 'postcontent',
             'label' => 'Post Content',
             'rules' => 'trim|required'
+        )
+    );
+
+    public $description_rules = array(
+
+        'UserId' => array(
+            'field' => 'userid',
+            'label' => 'User',
+            'rules' => 'trim|required'
+        ),
+        'PostKeywords' => array(
+            'field' => 'postkeywords',
+            'label' => 'Post Keywords',
+            'rules' => 'trim'
+        ),
+        'PostDescription' => array(
+            'field' => 'postdescription',
+            'label' => 'Post Description',
+            'rules' => 'trim'
         )
     );
 }

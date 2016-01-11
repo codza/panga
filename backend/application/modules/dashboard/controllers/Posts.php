@@ -128,59 +128,75 @@ class Posts extends Admin_Controller {
         $posttitle = "";  $categoryid = ""; $postcontent = "";  $posttype = ""; $publictiondate ="";
         $postname ="";$userid=""; $postslug=""; $parentid = ""; $posttemplate = "";
 
+        $validationrules="";
+
 
        if($id != NULL){
             $this->data['post'] = $this->postmodel->get((int)$id);
         }
 
         if($_POST){
-            $posttitle = $this->input->post('posttitle',true);
-            $postslug = $this->input->post('postslug',true);
-            $parentid = $this->input->post('parentid',true);
-            $post_id = $this->input->post('postid',true);
-            $posttemplate = $this->input->post('posttemplate',true);
-            $publicationdate = $this->input->post('publicationdate', true);
-            $posttype = $this->input->post('posttype',true);
-            $postisactive = $this->input->post('postisactive',true);
-            $categoryid = $this->input->post('categoryid',true);
-            $postcontent = $this->input->post('postcontent',true);
-            $postname = $this->input->post('postname',true);
-            $userid = $this->input->post('userid',true);
-            $postisactive = (strcmp($postisactive,"on")==0)?1:0;
-            $datatoupdate = array(
-                "user_id"=>$userid,
-                "category_id"=>$categoryid,
-                "parent_id"=>$parentid,
-                "post_type"=>$posttype,
-                "is_active"=>$postisactive,
-                "post_template"=>$posttemplate,
-                "post_slug"=>put_underscore($postslug),
-                "post_title"=>$posttitle,
-                "post_name"=>$postname,
-                "publication_date"=>$publicationdate,
-                "post_content"=>$postcontent
-            );
 
-              $validationrules = $this->postmodel->create_rules;
+            if(isset($_POST['updatecontent'])){
+                $posttitle = $this->input->post('posttitle',true);
+                $postslug = $this->input->post('postslug',true);
+                $parentid = $this->input->post('parentid',true);
+                $post_id = $this->input->post('postid',true);
+                $posttemplate = $this->input->post('posttemplate',true);
+                $publicationdate = $this->input->post('publicationdate', true);
+                $posttype = $this->input->post('posttype',true);
+                $postisactive = $this->input->post('postisactive',true);
+                $categoryid = $this->input->post('categoryid',true);
+                $postcontent = $this->input->post('postcontent',true);
+                $postname = $this->input->post('postname',true);
+                $userid = $this->input->post('userid',true);
+                $postisactive = (strcmp($postisactive,"on")==0)?1:0;
 
-               $this->form_validation->set_rules($validationrules);
+
+                $datatoupdate = array(
+                    "user_id"=>$userid,
+                    "category_id"=>$categoryid,
+                    "parent_id"=>$parentid,
+                    "post_type"=>$posttype,
+                    "is_active"=>$postisactive,
+                    "post_template"=>$posttemplate,
+                    "post_slug"=>put_underscore($postslug),
+                    "post_title"=>$posttitle,
+                    "post_name"=>$postname,
+                    "publication_date"=>$publicationdate,
+                    "post_content"=>$postcontent
+                );
+                $rules = $this->postmodel->create_rules;
+
+
+            }
+
+            if(isset($_POST['updatedescription'])){
+
+                $post_id = $this->input->post('postid',true);
+                $user_id = $this->input->post('userid',true);
+                $post_keywords = $this->input->post('postkeywords',true);
+                $post_description = $this->input->post('postdescription',true);
+
+                $datatoupdate = array(
+                    "user_id"=>$user_id,
+                    "post_keywords"=>$post_keywords,
+                    "post_description"=>$post_description
+
+                );
+                $rules = $this->postmodel->description_rules;
+            }
+
+
+
+
+          ///    $validationrules = $this->postmodel->create_rules;
+
+               $this->form_validation->set_rules($rules);
 
                if($this->form_validation->run() == FALSE){
                    $this->data['errors']='form validation error';
                }else{
-                   $datatoupdate = array(
-                       "user_id"=>$userid,
-                       "category_id"=>$categoryid,
-                       "parent_id"=>$parentid,
-                       "post_type"=>$posttype,
-                       "is_active"=>$postisactive,
-                       "post_template"=>$posttemplate,
-                       "post_slug"=>put_underscore($postslug),
-                       "post_title"=>$posttitle,
-                       "post_name"=>$postname,
-                       "publication_date"=>$publicationdate,
-                       "post_content"=>$postcontent
-                   );
                    $post_id = $this->postmodel->save($datatoupdate,$post_id);
                    $this->data['post'] = $this->postmodel->get($post_id);
                }

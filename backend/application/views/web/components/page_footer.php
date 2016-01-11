@@ -37,7 +37,8 @@
     </div>
 </div>
     <!-- JavaScript -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+   <!-- <script src="http://code.jquery.com/jquery-latest.js"></script>-->
+    <script src="<?php echo site_url('assets/jquery/jquery-1.12.0.min.js'); ?>"></script>
     <script src="<?php echo site_url('assets/bootstrap/js/bootstrap.min.js'); ?>"></script>
     <!-- Script to Activate the Carousel -->
     <script>

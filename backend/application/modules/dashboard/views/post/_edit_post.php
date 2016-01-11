@@ -32,6 +32,7 @@
             <div id="OtherPostSettings" class="tab-pane fade in">
                 <div class="container">
                     <h1>Other Post Settings </h1>
+                    <?php $this->load->view('dashboard/post/components/_edit_other_settings'); ?>
                 </div>
             </div>
 

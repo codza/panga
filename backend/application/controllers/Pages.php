@@ -12,9 +12,11 @@ class Pages extends Frontend_Controller{
 
         $total_uri_segment = $this->uri->total_segments();
 
+    //    echo $total_uri_segment;
+
         $this->data['website_url_array'] = $this->uri->segment_array();
 
-        $this->data['primary_posts'] = $this->postmodel->get_by( array("tbl_post.post_type" => 'primary_page'),FALSE);
+        $this->data['primary_posts'] = $this->postmodel->get_primary_posts();
 
 
       //  $this->data['posts'] = $this->postmodel->get(7);
@@ -104,7 +106,7 @@ class Pages extends Frontend_Controller{
         if(count($this->data['post'])==0){
 
             //$post_template  = '_' . $this->data['post']->post_template;
-            $this->data['subview'] ='errors/page_404';
+            $this->data['subview'] ='errors/custom_error_404';
 
         }else{
          //   $method = '_' . $this->data['post']->post_template;

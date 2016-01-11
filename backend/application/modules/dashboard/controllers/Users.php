@@ -142,24 +142,6 @@ class Users extends Admin_Controller {
 
     public function delete($id) {
         
-        
-        $type="videos";
-        $this->load->helper("file");
-        //
-        $videos = $this->videomodel->get_video_by_user($id);
-        foreach($videos as $video ){
-            
-        $this->videotagmodel->delete_tags_by_video_id($video->video_id);
-        $this->load->helper('file');
-        $path ='./video/' . $video->video_code;
-        $this->elasticsearch->delete($type,$id);
-        delete_files($path, true);
-        rmdir($path);
-        
-        
-        }    
-        $this->videomodel->delete_videos_by_user_id($id);
-        
         $this->usermodel->delete($id);
         
         redirect('dashboard/users', 'refresh');

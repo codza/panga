@@ -9,10 +9,18 @@ html, body {
 }
 .rhu-logo{
     height:50px;
+    display: block;
+    margin: 0 auto;
 }
 .rhu-reset-pm{
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
+}
+
+.bottom-align-text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 .main-content{
 
@@ -24,6 +32,9 @@ html, body {
     margin: 0px auto;
 }
 
+/**************** ************** **************/
+/**************** navigation bar **************/
+/**************** ************** **************/
 #rhu_navbar {
     padding-right: 45px;
     padding-left: 45px;
@@ -36,8 +47,9 @@ html, body {
 
 }
 .rhu_navbar {
-    background: #a14535;
-    height: 50px;
+    background: #A14535;
+ /*   background: #006000;*/
+    /*height: 75px;*/
     margin: auto auto 0px auto;
     padding: 0px 0px 0px 0px;
     border: none;
@@ -55,17 +67,49 @@ html, body {
     word-spacing: 1px;
     font-size:22px;
     height: 100%;
-    padding: 0px 15px;
+   /* padding: 0px 15px;*/
     color: #fff;
+
 }
 .navbar-header a.rhu_navbar_brand:hover{
     /* float: none;*/
     font-weight: bold;
     font-size:22px;
     height: 100%;
-    padding: 0px 15px;
-    color: #c89381;
+   /* padding: 0px 15px;*/
+    color: #D1A595;
 }
+
+
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+/*.navbar-inverse .navbar-nav>li>a:first-letter {
+    text-transform: uppercase;
+}*/
+
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #D1A595;
+    font-weight: bold;
+}
+.navbar-inverse .navbar-nav>li.active >a , .navbar-inverse .navbar-nav>li.active >a:hover {
+    /*color: #231F20;*/
+    color: #c9bf99;
+    font-weight: bold;
+    background-color: rgba(8, 8, 8, 0);
+}
+
+
+/**************** ************** **************/
+/**************** ************** **************/
+
+
+
+
 .rhu_post{
     text-align: justify;
     min-height: 100%;
@@ -173,12 +217,6 @@ html, body {
     width: 100%;
     height: 100%;
 }
-/*.rhu_image{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-}*/
 
 .rhu-overview-container{
     margin: 0px 0px 0px 0px;
@@ -248,27 +286,6 @@ text-transform: uppercase;
 .rhu_staff_members h5{
     font-weight: bold;
 }
-.navbar-inverse .navbar-nav>li>a {
-    color: #ffffff;
-    font-weight: bold;
-}
-
-.navbar-inverse .navbar-nav>li>a:first-letter {
-    text-transform: uppercase;
-}
-.navbar-inverse .navbar-nav>li>a {
-    color: #ffffff;
-    font-weight: bold;
-}
-.navbar-inverse .navbar-nav>li>a:hover {
-    color: #c89381;
-    font-weight: bold;
-}
-.navbar-inverse .navbar-nav>li.active >a , .navbar-inverse .navbar-nav>li.active >a:hover {
-    color: #c9bf99;
-    font-weight: bold;
-    background-color: rgba(8, 8, 8, 0);
-}
 .rhu_thumbnail{
     border: none;
     padding: 0px;
@@ -290,7 +307,7 @@ border-radius: 5px;
 /* here goes the footer cascading style sheet*/
 #footer {
 
-    background-color: #2f2f2f;
+    background-color: #231F20;
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -321,7 +338,7 @@ border-radius: 5px;
 }
 
 #footer p a:hover {
-    color: #c89381;
+    color: #F0EDE4;
     margin-bottom: 0px;
     font-size: 16px;
     text-decoration: none;

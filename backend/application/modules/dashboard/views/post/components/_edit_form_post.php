@@ -97,7 +97,7 @@ $attributes = array('class' => 'form-horizontal');
 
     <div class="form-group" >
         <div class="col-md-offset-2 col-md-4">
-            <button type="submit" class="btn">Update</button>
+            <button type="submit" name="updatecontent" class="btn">Update</button>
         </div>
     </div>
 <?php echo form_close();?>
@@ -112,7 +112,4 @@ $attributes = array('class' => 'form-horizontal');
         }
 
     });
-
-
-
 </script>

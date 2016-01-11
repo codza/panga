@@ -13,11 +13,11 @@
     <title><?php echo $meta_title_acronym;echo ($post->post_name!= NULL) ? " - ".$post->post_name:"";?></title>
     <!-- Bootstrap core CSS -->
     <!-- half-slider.css -->
-    <link rel="stylesheet" href="<?php echo site_url('assets/bootstrap/css/bootstrap.min.css'); ?>" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="<?php echo site_url('assets/bootstrap/css/half-slider.css'); ?>" />
-    <link rel="stylesheet" href="<?php echo site_url('frontend/css/front_page_global.css'); ?>" />
-    <link rel="stylesheet" href="<?php echo site_url('frontend/css/responsive_global.css'); ?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/bootstrap/css/bootstrap.min.css'); ?>" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/bootstrap/css/half-slider.css'); ?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo site_url('frontend/css/front_page_global.css'); ?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo site_url('frontend/css/responsive_global.css'); ?>" />
 
     <!-- Add custom CSS here -->
 </head>
