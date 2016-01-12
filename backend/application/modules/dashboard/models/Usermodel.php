@@ -1,6 +1,6 @@
 <?php
 
-class UserModel extends MY_Model {
+class Usermodel extends MY_Model {
 
     protected $_table_name = 'tbl_user';
     protected $_primary_key = 'user_id';

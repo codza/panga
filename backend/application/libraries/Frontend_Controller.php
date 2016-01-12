@@ -4,9 +4,9 @@ class Frontend_Controller extends MY_Controller {
 
 	function __construct(){
 		parent::__construct();
-        $this->load->model('dashboard/postmodel');
-        $this->load->model('dashboard/categorymodel');
-        $this->load->model('dashboard/mediamodel');
+        $this->load->model('dashboard/Postmodel','postmodel');
+        $this->load->model('dashboard/Categorymodel','categorymodel');
+        $this->load->model('dashboard/Mediamodel','mediamodel');
 
       //  $this->data['menu'] = $this->postmodel->get_nested();
 

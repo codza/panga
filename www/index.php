@@ -3,7 +3,7 @@ $pangaDir="../backend/";
 ///define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
 	switch (dirname(__FILE__)) {
-		case 'C:\wamp\www\02_BASE\panga\www':
+		case '/home/lodza/phpwebsite/panga/www':
 			define('ENVIRONMENT', 'development');
 		break;
 		default:

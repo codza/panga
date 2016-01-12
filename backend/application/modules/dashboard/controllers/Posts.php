@@ -5,8 +5,8 @@ class Posts extends Admin_Controller {
 	{
 		parent::__construct();
 
-        $this->load->model("postmodel");
-        $this->load->model("categorymodel");
+        $this->load->model("dashboard/Postmodel","postmodel");
+        $this->load->model("dashboard/Categorymodel","categorymodel");
         $this->load->library('form_validation');
         $this->data["categories"] = $this->categorymodel->get_array_id_name();
         $this->data["post_no_parents"]=$this->postmodel->get_no_parents();

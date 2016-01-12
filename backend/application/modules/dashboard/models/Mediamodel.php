@@ -1,5 +1,5 @@
 <?php
-class MediaModel extends MY_Model {
+class Mediamodel extends MY_Model {
 	
 	protected $_table_name = 'tbl_media';
 	protected $_primary_key = 'media_id';

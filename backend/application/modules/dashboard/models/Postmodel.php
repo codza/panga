@@ -1,5 +1,5 @@
 <?php
-class PostModel extends MY_Model {
+class Postmodel extends MY_Model {
 	
 	protected $_table_name = 'tbl_post';
 	protected $_primary_key = 'post_id';
@@ -11,8 +11,8 @@ class PostModel extends MY_Model {
 	
 	function __construct() {
 		parent::__construct();
-        $this->load->model('dashboard/categorymodel');
-        $this->load->model('dashboard/mediamodel');
+        $this->load->model('dashboard/Categorymodel',"categorymodel");
+        $this->load->model('dashboard/Mediamodel',"mediamodel");
 
 	}
     public function get($id = null , $single = FAlSE){

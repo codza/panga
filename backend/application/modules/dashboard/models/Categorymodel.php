@@ -1,5 +1,5 @@
 <?php
-class CategoryModel extends MY_Model {
+class Categorymodel extends MY_Model {
 
     protected $_table_name = 'tbl_category';
     protected $_primary_key = 'category_id';
