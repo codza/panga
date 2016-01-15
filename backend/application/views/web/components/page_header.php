@@ -10,7 +10,7 @@
 
     <link rel="icon" href="<?php echo site_url('assets/images/rhu-logo.ico'); ?>" />
 
-    <title><?php echo $meta_title_acronym;echo ($post->post_name!= NULL) ? " - ".$post->post_name:"";?></title>
+    <title><?php echo $meta_title_acronym;echo ($post!=NULL) ? /*1*/ ($post->post_name!= NULL) ? " - ".$post->post_name:""/*1*/ :"";?></title>
     <!-- Bootstrap core CSS -->
     <!-- half-slider.css -->
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/bootstrap/css/bootstrap.min.css'); ?>" />
