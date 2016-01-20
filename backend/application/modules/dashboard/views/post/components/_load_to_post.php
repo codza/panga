@@ -23,6 +23,9 @@ $attributes = array('class' => 'form-horizontal');
     </div>
      <!-- end result-->
 </div>
+<div class="col-lg-7" id="loaded_post_list" style="border: 1px solid #000;">
+    
+</div>
 
  
 
@@ -41,10 +44,11 @@ $attributes = array('class' => 'form-horizontal');
                 method: "GET",
                 url: URL+"/by/name/"+inputSearchPost+"/tk/"+tk+"/format/json"
             }).done(function( resp ) {
-                console.log(resp.posts);
+             //   console.log(resp.posts);
+            //    console.log(resp.posts);
                // console.log(resp.status);
 
-                var items = resp.posts;
+                var items = resp[1].posts;
                 //.html(): Clean HTML inside and append
 
                 for( var i=0; i < items.length; i++) {
@@ -57,13 +61,13 @@ $attributes = array('class' => 'form-horizontal');
                    /// console.log();
                 }
 
-          /*  */    $(".add_too_post").click(function () {
+          /*   */  $(".add_too_post").click(function () {
                     var RESSOURCES_POSTS_URL_LOAD_TO_POST = "<?php echo RESSOURCES_POSTS_URL_LOAD_TO_POST; ?>";
                     var post_to_load_id = $(this).data("newlineLoadedpostid");
                     var postData = new FormData();
                     var post_id = "<?php echo $post->post_id; ?>";
-                    var user_id = "<?php echo $this->userSession->user_id; ?>";
-                    postData.append("user_id", user_id);
+                    var tk      = "<?php echo $this->tokenSession; ?>";
+                    postData.append("tk", tk);
                     postData.append("post_id", post_id);
                     postData.append("loaded_post_id", post_to_load_id);
                     console.log("********************************");
@@ -79,6 +83,7 @@ $attributes = array('class' => 'form-horizontal');
                     }).done(function (data) {
 
                         var resp = JSON.parse(data);
+                        console.log(resp);
 
                         if (resp.status === "success") {
                             console.log(resp);
@@ -87,7 +92,7 @@ $attributes = array('class' => 'form-horizontal');
                     });
                     console.log("********************************");
 
-                });
+                }); 
 
 
             });
