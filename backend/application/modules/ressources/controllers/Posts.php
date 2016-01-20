@@ -139,9 +139,9 @@ class Posts extends REST_Controller
         if ($post_id) {
             $post = $this->postmodel->get($post_id);
         }
-        if ($user_id !== null && $loaded_post_id !== null && $post !== null ) {
+        if ($this->request_user->user_id !== null && $loaded_post_id !== null && $post !== null ) {
           //  $user_id = $user['user_id'];
-            $datatoinsert = array("post_id" =>(int) $post->post_id, "user_id" => (int) $user_id, "loaded_post_id" => (int) $loaded_post_id);
+            $datatoinsert = array("post_id" =>(int) $post->post_id, "user_id" => (int) $this->request_user->user_id, "loaded_post_id" => (int) $loaded_post_id);
             /*$vid_lik_id =*/ $this->loadedpostmodel->save($datatoinsert);
 
         }

@@ -4,13 +4,13 @@ $attributes = array('class' => 'form-horizontal');
 
     <?php echo validation_errors(); ?>
 
-<div class="col-md-5">
+<div class="col-lg-5">
     <!--form -->
-    <div class="col-md-12" style="border:2px solid #000;">
+    <div class="col-lg-12" style="border:1px solid #000;">
         <?php echo form_open(current_url(),$attributes);?>
             <div class="form-group" >
-                <label class="col-md-2 control-label" for="inputSearchPost">Post :</label>
-                <div class="col-md-10">
+                <label class="col-lg-2 control-label" for="inputSearchPost">Post :</label>
+                <div class="col-lg-10">
                     <input type="text" class="form-control" id="inputSearchPost" name="postsearch" value="" placeholder="Type To Search ..." />
                 </div>
             </div>
@@ -18,7 +18,7 @@ $attributes = array('class' => 'form-horizontal');
     </div>
      <!--end of form -->
      <!-- result area -->
-    <div class="container col-md-12" id="result">
+    <div class="container col-lg-12" id="result">
 
     </div>
      <!-- end result-->
@@ -51,8 +51,8 @@ $attributes = array('class' => 'form-horizontal');
                     $("#result").html(
                      //   "<div class=''style='border:2px solid #000;'>" +
                         "<div class='col-lg-1'>"+items[i].post_id+"</div>" +
-                        "<div class='col-lg-6'>"+items[i].post_title+"</div>" +
-                        "<div class='col-lg-5'><a class='add_too_post' data-newline-loadedpostid='"+items[i].post_id+"' href='#'>add to related</a>"+"</div>"/*+
+                        "<div class='col-lg-7'>"+items[i].post_title+"</div>" +
+                        "<div class='col-lg-4'><a class='add_too_post' data-newline-loadedpostid='"+items[i].post_id+"' href='#'>add to related</a>"+"</div>"/*+
                         "</div>"*/);
                    /// console.log();
                 }
