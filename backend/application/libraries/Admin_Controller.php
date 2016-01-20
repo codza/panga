@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin_Controller extends MY_Controller {
     var $userSession;
+    var $sessionToken;
 	function __construct(){
 		parent::__construct();
 
@@ -36,7 +37,8 @@ class Admin_Controller extends MY_Controller {
       //  echo "######################################<br>";
       //  echo $this->session->user_info['user_token']."<br>";
       //  echo "######################################<br>";
-        $this->userSession = $this->usermodel->getUserByToken($this->session->user_info['user_token']) ;
+        $this->tokenSession= $this->session->user_info['user_token'];
+        $this->userSession = $this->usermodel->getUserByToken($this->tokenSession) ;
       //  echo "######################################<br>";
 
 

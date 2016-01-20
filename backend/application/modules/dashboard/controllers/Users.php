@@ -195,6 +195,8 @@ class Users extends Admin_Controller {
 
 
     public function test() {
+        echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br>";
+      //  echo $this->session->user_info->user_token."<br>";
         echo "######################################<br>";
         var_dump($this->session->user_info);
         echo "######################################<br>";

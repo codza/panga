@@ -118,47 +118,48 @@ class Posts extends REST_Controller
         }
     }
     function async_loadpost_post() {
+        
+    //    $user_id = null;
+        $post_id = null;
+        $post_to_load_id = null;
         $post = null;
-        $loaded_post = null;
-        $u = 0;
-        $ul = 1;
-        $numberOfLikes = 0;
-        $numberOfUnlikes = 0;
+        $data =null;
+
         //  $resp = null;
-        $usertoken = $this->post('u_t');
-        $v_id = (int) $this->post('v_id');
-        $u_or_ul = (int) $this->post('u_or_ul');
+    //    $user_id = (int) $this->post('user_id');
+        $post_id = (int) $this->post('post_id');
+        $loaded_post_id = (int) $this->post('loaded_post_id');/**/
 
-        if (!$usertoken || !$v_id) {
+
+      /*  if (!$post_id || !$post_to_load_id) {
             $this->response(NULL, 400);
+        }*/
+
+
+        if ($post_id) {
+            $post = $this->postmodel->get($post_id);
+        }
+        if ($user_id !== null && $loaded_post_id !== null && $post !== null ) {
+          //  $user_id = $user['user_id'];
+            $datatoinsert = array("post_id" =>(int) $post->post_id, "user_id" => (int) $user_id, "loaded_post_id" => (int) $loaded_post_id);
+            /*$vid_lik_id =*/ $this->loadedpostmodel->save($datatoinsert);
+
         }
 
-        if ($usertoken) {
-            $user = $this->usermodel->getUserByToken($usertoken);
-        }
-        if ($v_id) {
-            $video = $this->videomodel->get($v_id);
-        }
-        if ($user !== null || $video !== null) {
-            $user_id = $user['user_id'];
-            $datatoinsert = array("video_id" => $video->video_id, "user_id" => (int) $user_id, "liked_or_unliked" => (int) $u_or_ul);
-            $vid_lik_id = $this->videolikedmodel->save($datatoinsert);
-            $videos_liked = $this->videolikedmodel->get_liked_or_unliked_by_video_id($video->video_id, $u);
-            $videos_unliked = $this->videolikedmodel->get_liked_or_unliked_by_video_id($video->video_id, $ul);
-            $numberOfLikes = count($videos_liked);
-            $numberOfUnlikes = count($videos_unliked);
-        }
-        $resp = ['status' => 'success',
-            'video_likes' => $numberOfLikes,
-            'video_unlikes' => $numberOfUnlikes
+
+     $data = $this->loadedpostmodel->get_loaded_post_by_post_id($post_id);
+
+        $resp = [
+            'status' => 'success','data'=>$data
         ];
 
-        if ($vid_lik_id) {
+        if ($resp) {
             $this->response($resp, 200);
         } else {
             $this->response(NULL, 404);
         }
     }
+    
 
 
 
