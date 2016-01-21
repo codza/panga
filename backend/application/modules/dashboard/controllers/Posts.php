@@ -7,6 +7,7 @@ class Posts extends Admin_Controller {
 
         $this->load->model("dashboard/Postmodel","postmodel");
         $this->load->model("dashboard/Categorymodel","categorymodel");
+        $this->load->model("dashboard/loadedpostmodel","loadedpostmodel");
         $this->load->library('form_validation');
         $this->data["categories"] = $this->categorymodel->get_array_id_name();
         $this->data["post_no_parents"]=$this->postmodel->get_no_parents();
@@ -133,6 +134,7 @@ class Posts extends Admin_Controller {
 
        if($id != NULL){
             $this->data['post'] = $this->postmodel->get((int)$id);
+            $this->data["loadedposts"]= $this->loadedpostmodel->get_loaded_post_by_post_id((int)$id);
         }
 
         if($_POST){

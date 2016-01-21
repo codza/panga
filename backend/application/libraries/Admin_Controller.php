@@ -32,25 +32,14 @@ class Admin_Controller extends MY_Controller {
           //
 
         }
-      //  echo "######################################<br>";
-       // var_dump($this->session->user_info);
-      //  echo "######################################<br>";
-      //  echo $this->session->user_info['user_token']."<br>";
-      //  echo "######################################<br>";
+
         $this->tokenSession= $this->session->user_info['user_token'];
         $this->userSession = $this->usermodel->getUserByToken($this->tokenSession) ;
-      //  echo "######################################<br>";
 
-
-
-       /* echo "######################################<br>";
-        var_dump($this->session->userdata('user_info'));
-        echo "######################################<br>";*/
 
 
         }
 
-        //$this->data['session_user_id']=$this->session->userdata['user_data']['user_id'];
 
 
 }

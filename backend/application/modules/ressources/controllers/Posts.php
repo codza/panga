@@ -161,7 +161,7 @@ class Posts extends REST_Controller
         }
         
         
-            $datatoinsert = array("post_id" =>(int) $post->post_id, "user_id" => (int) $this->request_user->user_id, "loaded_post_id" => (int) $loaded_post_id);
+            $datatoinsert = array("post_id" =>(int) $post_id, "user_id" => (int) $this->request_user->user_id, "loaded_post_id" => (int) $loaded_post_id);
              $vid_lik_id = $this->loadedpostmodel->save($datatoinsert);
 
         

@@ -24,6 +24,33 @@ $attributes = array('class' => 'form-horizontal');
      <!-- end result-->
 </div>
 <div class="col-lg-7" id="loaded_post_list" style="border: 1px solid #000;">
+    <table class="table">
+        <thead>
+        <tr>
+            <td> ID </td><td> Post Name</td><td> </td>
+        </tr>
+        </thead>
+        <tbody>
+          
+        <?php if(count($loadedposts)): foreach($loadedposts as $post):?>
+			<tr>
+				<td><?php echo $post->post_id; ?></td>
+				<td><?php echo $post->post_name;?></td>
+				<td>
+				<?php echo btn_edit('dashboard/posts/edit/'. $post->post_id ); ?> |
+				<?php echo btn_delete('dashboard/posts/delete/'. $post->post_id); ?>
+				</td>
+			</tr>
+	<?php endforeach;?>
+        <?php else: ?>
+		<tr>
+			<td colspan="3"> No post could be found </td>
+		</tr>
+
+	<?php endif;?>
+        </tbody>
+        
+    </table>
     
 </div>
 
