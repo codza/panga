@@ -24,7 +24,7 @@ $attributes = array('class' => 'form-horizontal');
      <!-- end result-->
 </div>
 <div class="col-lg-7" id="loaded_post_list" style="border: 1px solid #000;">
-    <table class="table">
+    <table class="table" id="loaded_posts_list">
         <thead>
         <tr>
             <td> ID </td><td> Post Name</td><td> </td>
@@ -34,7 +34,7 @@ $attributes = array('class' => 'form-horizontal');
           
         <?php if(count($loadedposts)): foreach($loadedposts as $post):?>
 			<tr>
-                            <td colspan="3"><?php echo $post->sp_post_id; ?></td>
+                            <td ><?php echo $post->sp_post_id; ?></td>
 				<td><?php echo $post->sp_post_name;?></td>
 				<td>
 				<?php echo btn_edit('dashboard/posts/edit/'. $post->sp_post_id ); ?> |
@@ -75,7 +75,7 @@ $attributes = array('class' => 'form-horizontal');
             //    console.log(resp.posts);
                // console.log(resp.status);
 
-                var items = resp[1].posts;
+                var items = resp[1].data;
                 //.html(): Clean HTML inside and append
 
                 for( var i=0; i < items.length; i++) {
@@ -88,7 +88,7 @@ $attributes = array('class' => 'form-horizontal');
                    /// console.log();
                 }
 
-          /*   */  $(".add_too_post").click(function () {
+          /*   */  $(".add_too_post").click(function (e) {
                     var RESSOURCES_POSTS_URL_LOAD_TO_POST = "<?php echo RESSOURCES_POSTS_URL_LOAD_TO_POST; ?>";
                     var post_to_load_id = $(this).data("newlineLoadedpostid");
                     var postData = new FormData();
@@ -107,16 +107,37 @@ $attributes = array('class' => 'form-horizontal');
                         method: "POST",
                         url: RESSOURCES_POSTS_URL_LOAD_TO_POST,
                         data: postData
-                    }).done(function (data) {
+                    }).done(function (resp) {
 
-                        var resp = JSON.parse(data);
-                        console.log(resp);
+                        var Var_resp = JSON.parse(resp);
+                        //console.log(resp);
+                        console.log("/////////////////////////////");
+                        console.log(Var_resp);
+                        console.log("/////////////////////////////");
+                        
 
-                        if (resp.status === "success") {
-                            console.log(resp);
+                        if (Var_resp.status === "success") {
+                            
+                            
+                        var items = Var_resp.data;
+                //.html(): Clean HTML inside and append
+                        $("#loaded_posts_list tbody tr").remove();
+                        for( var i=0; i < items.length; i++) {
+                            $("#loaded_posts_list tbody").append(
+                             //   "<div class=''style='border:2px solid #000;'>" +
+                                "<tr>"+
+                                        "<td>"+items[i].sp_post_id+"</td>" +
+                                        "<td>"+items[i].sp_post_name+"</td>"+
+                                        "<td><a href='"+items[i].loaded_id+"' >delete</a></td>"+
+                                "</tr>");
+
+                        }
+                            
+                            ///location.reload();
                         }
 
                     });
+                    e.preventDefault();
                     console.log("********************************");
 
                 }); 

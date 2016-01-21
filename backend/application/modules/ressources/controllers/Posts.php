@@ -126,7 +126,7 @@ class Posts extends REST_Controller
 
         $posts = $this->postmodel->get_where_like($searchColumn , $searchTerm, false  );
 
-        $post_resp = ["posts"=>$posts];
+        $post_resp = ["data"=>$posts];
 
         if($posts){
             $this->response(array(
@@ -150,24 +150,24 @@ class Posts extends REST_Controller
         $post_id =  $this->post('post_id');
         $loaded_post_id = $this->post('loaded_post_id');/**/
         
-        $resp = array("post_id"=>$post_id,
+    /*    $resp = array("post_id"=>$post_id,
             "loaded_post_id"=>$loaded_post_id,
-            "user_id" =>$this->request_user->user_id);
+            "user_id" =>$this->request_user->user_id);*/
 
         if (is_null($post_id) || is_null($loaded_post_id) ) {
-           // $this->response($resp, 200);
+          
             $this->response(array(
                 $this->status[2],$this->response_message[3]), 200);
         }
         
         
-            $datatoinsert = array("post_id" =>(int) $post_id, "user_id" => (int) $this->request_user->user_id, "loaded_post_id" => (int) $loaded_post_id);
-             $vid_lik_id = $this->loadedpostmodel->save($datatoinsert);
+        $datatoinsert = array("post_id" =>(int) $post_id, "user_id" => (int) $this->request_user->user_id, "loaded_post_id" => (int) $loaded_post_id);
+        $vid_lik_id = $this->loadedpostmodel->save($datatoinsert);
 
         
 
 
-  /*   $data = $this->loadedpostmodel->get_loaded_post_by_post_id($post_id);
+    $data = $this->loadedpostmodel->get_loaded_post_by_post_id($post_id);
 
         $resp = [
             'status' => 'success','data'=>$data
@@ -177,9 +177,9 @@ class Posts extends REST_Controller
             $this->response($resp, 200);
         } else {
             $this->response(NULL, 404);
-        }*/
+        }/* */
         
-        $this->response($resp, 200);
+        ///$this->response($resp, 200);
     }
     
 

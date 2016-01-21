@@ -11,25 +11,25 @@
         </ul>
         <div class="tab-content">
 
-            <div id="PostContent" class="tab-pane fade in active">
+            <div id="PostContent" class="tab-pane container fade in active">
                 <div class="container">
                     <?php $this->load->view('dashboard/post/components/_edit_form_post'); ?>
                 </div>
             </div>
 
-            <div id="MediaPost" class="tab-pane fade in ">
+            <div id="MediaPost" class="tab-pane container fade in ">
                 <div class="container">
                     <?php $this->load->view('dashboard/post/components/_upload_media'); ?>
                 </div>
               </div>
 
-            <div id="LoadToPost" class="tab-pane fade in">
+            <div id="LoadToPost" class="tab-pane container fade in">
                 <div class="container">
                     <?php $this->load->view('dashboard/post/components/_load_to_post'); ?>
                 </div>
             </div>
 
-            <div id="OtherPostSettings" class="tab-pane fade in">
+            <div id="OtherPostSettings" class="tab-pane container fade in">
                 <div class="container">
                     <h1>Other Post Settings </h1>
                     <?php $this->load->view('dashboard/post/components/_edit_other_settings'); ?>
