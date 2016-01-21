@@ -39,7 +39,7 @@
         </div>
 
         <div>
-            <?php  echo anchor('admin/posts', 'Back To List ', 'title="posts list"');?>
+            <?php  echo anchor('dashboard/posts', 'Back To List ', 'title="posts list"');?>
         </div>
     </div>
     <div class="col-lg-2">

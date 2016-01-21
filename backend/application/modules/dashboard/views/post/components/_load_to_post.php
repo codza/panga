@@ -34,11 +34,11 @@ $attributes = array('class' => 'form-horizontal');
           
         <?php if(count($loadedposts)): foreach($loadedposts as $post):?>
 			<tr>
-				<td><?php echo $post->post_id; ?></td>
-				<td><?php echo $post->post_name;?></td>
+                            <td colspan="3"><?php echo $post->sp_post_id; ?></td>
+				<td><?php echo $post->sp_post_name;?></td>
 				<td>
-				<?php echo btn_edit('dashboard/posts/edit/'. $post->post_id ); ?> |
-				<?php echo btn_delete('dashboard/posts/delete/'. $post->post_id); ?>
+				<?php echo btn_edit('dashboard/posts/edit/'. $post->sp_post_id ); ?> |
+				<?php echo btn_delete('dashboard/posts/delete/'. $post->sp_post_id); ?>
 				</td>
 			</tr>
 	<?php endforeach;?>
