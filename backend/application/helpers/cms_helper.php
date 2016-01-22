@@ -17,8 +17,8 @@ function btn_edit($uri ,$label="Edit") {
     return anchor($uri, '<span class="glyphicon glyphicon-edit"></span> '.$label, 'title="' . $label . '"');
 }
 
-function btn_delete($uri, $entity="record") {
-    return anchor($uri, '<span class="glyphicon glyphicon-remove"></span> Delete', array(
+function btn_delete($uri,$label="Delete" ,$entity="record") {
+    return anchor($uri, '<span class="glyphicon glyphicon-remove"></span>'.$label, array(
         'onclick' => "return confirm('You are about to delete a ".$entity.". This cannot be undone. Are you sure?');"
     ));
 }

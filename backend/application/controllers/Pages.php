@@ -17,6 +17,8 @@ class Pages extends Frontend_Controller{
         $this->data['website_url_array'] = $this->uri->segment_array();
 
         $this->data['primary_posts'] = $this->postmodel->get_primary_posts();
+        
+        $this->data['menu'] = $this->postmodel->get_nested();
 
 
       //  $this->data['posts'] = $this->postmodel->get(7);
@@ -117,6 +119,10 @@ class Pages extends Frontend_Controller{
 
         $this->load->view('web/_main_layout', $this->data);
 	}
+        function test(){
+            $this->data['menu'] = $this->postmodel->get_nested();
+            var_dump($this->data['menu']);
+        }
 
 
 

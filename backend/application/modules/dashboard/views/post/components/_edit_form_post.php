@@ -28,12 +28,7 @@ $attributes = array('class' => 'form-horizontal');
             <input type="text" class="form-control" id="inputPostTitle" name="posttitle" value="<?php echo $post->post_title;?>" placeholder="Post Title" />
         </div>
     </div>
-    <div class="form-group" >
-        <label class="col-md-2 control-label" for="inputPostSlug">Post Slug :</label>
-        <div class="col-md-4">
-            <input type="text" class="form-control" id="inputPostSlug" name="postslug" value="<?php echo $post->post_slug;?>" placeholder="Post Slug" />
-        </div>
-    </div>
+
     <div class="form-group" >
         <label class="col-md-2 control-label" for="inputPostType">Post Type :</label>
         <div class="col-md-4">

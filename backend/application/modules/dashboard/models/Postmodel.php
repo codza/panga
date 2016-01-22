@@ -57,13 +57,13 @@ class Postmodel extends MY_Model {
 
         $array = array();
         foreach ($posts as $post) {
-            if (! $post['parent_id']) {
+            if ($post['parent_id']==0) {
                 $array[$post['post_id']] = $post;
-            }
-            else {
+            }else {
                 $array[$post['parent_id']]['children'][] = $post;
             }
         }
+     //   var_dump($array);
         return $array;
     }
 

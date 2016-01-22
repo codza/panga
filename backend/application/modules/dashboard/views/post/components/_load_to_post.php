@@ -37,8 +37,7 @@ $attributes = array('class' => 'form-horizontal');
                             <td ><?php echo $post->sp_post_id; ?></td>
 				<td><?php echo $post->sp_post_name;?></td>
 				<td>
-				<?php echo btn_edit('dashboard/posts/edit/'. $post->sp_post_id ); ?> |
-				<?php echo btn_delete('dashboard/posts/delete/'. $post->sp_post_id); ?>
+				<?php echo btn_delete('dashboard/posts/delete/'. $post->sp_post_id,"Remove"); ?>
 				</td>
 			</tr>
 	<?php endforeach;?>

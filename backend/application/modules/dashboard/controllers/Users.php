@@ -10,17 +10,16 @@ class Users extends Admin_Controller {
     }
 
     public function index() {
-        $ids = array($this->userSession->user_id,1);
+        $ids = array($this->userSession->user_id, 1);
 
         $this->data['users'] = $this->usermodel->getAllButCurrentUser($ids);
         $this->data['subview'] = 'dashboard/user/_user_list';
         $this->load->view('dashboard/_main_layout', $this->data);
-
     }
 
     public function create() {
         //$this->data['users'] = $this->usermodel->get();
-        
+
         $datatoinsert = null;
         $lastname = '';
         $firstname = '';
@@ -59,7 +58,7 @@ class Users extends Admin_Controller {
             if ($this->form_validation->run() == FALSE) {
                 //$this->load->view('myform');
                 //var_dump($validationrules);
-               // $this->data['errors'] = 'form validation error';
+                // $this->data['errors'] = 'form validation error';
             } else {
                 $this->usermodel->save($datatoinsert);
                 redirect('dashboard/users', 'refresh');
@@ -104,18 +103,19 @@ class Users extends Admin_Controller {
 
             $user = $this->usermodel->get($userid);
 
-            $old_value=trim($user->email);
-            if( $email!=$old_value) {
+            $old_value = trim($user->email);
+            if ($email != $old_value) {
                 $rules['Email']['rules'] = 'trim|required|valid_email|is_unique[tbl_user.email]';
             } else {
-                $rules['Email']['rules'] = 'trim|required|valid_email';;
+                $rules['Email']['rules'] = 'trim|required|valid_email';
+                ;
             }
 
 
 
 
 
-          //  $rules['Email']['rules'] = 'trim|required|edit_unique[tbl_user.email.' . $email . ']';
+            //  $rules['Email']['rules'] = 'trim|required|edit_unique[tbl_user.email.' . $email . ']';
 
             $this->load->library('form_validation');
             $this->form_validation->set_rules($rules);
@@ -141,9 +141,9 @@ class Users extends Admin_Controller {
     }
 
     public function delete($id) {
-        
+
         $this->usermodel->delete($id);
-        
+
         redirect('dashboard/users', 'refresh');
     }
 
@@ -158,7 +158,7 @@ class Users extends Admin_Controller {
             if ($userAuth == null) {
                 $this->data["errors"] = array("username" => "error", "password" => "error");
             } else {
-                $this->session->set_userdata("user_info",$userAuth);
+                $this->session->set_userdata("user_info", $userAuth);
                 redirect('dashboard/users', 'refresh');
             }
         }
@@ -185,26 +185,72 @@ class Users extends Admin_Controller {
         return TRUE;
     }
 
-    public function edit_unique($value, $params)
-    {
-        $this->set_message('edit_unique', "This %s is already in use!".$params." 000".$value );
+    public function edit_unique($value, $params) {
+        $this->set_message('edit_unique', "This %s is already in use!" . $params . " 000" . $value);
         list($table, $field, $current_id) = explode(".", $params);
         $result = $this->CI->db->where($field, $value)->get($table)->row();
         return ($result && $result->user_id != $current_id) ? FALSE : TRUE;
     }
 
-
     public function test() {
         echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br>";
-      //  echo $this->session->user_info->user_token."<br>";
+        //  echo $this->session->user_info->user_token."<br>";
         echo "######################################<br>";
         var_dump($this->session->user_info);
         echo "######################################<br>";
-        echo $this->session->user_info['user_token']."<br>";
+        echo $this->session->user_info['user_token'] . "<br>";
         echo "######################################<br>";
-        var_dump( $this->usermodel->getUserByToken($this->session->user_info['user_token']) );
+        var_dump($this->usermodel->getUserByToken($this->session->user_info['user_token']));
         echo "######################################<br>";
+        echo "1111111111111111111111111111111111111<br>";
+        $value = $this->contains_date('world_aids_day_celebrations_02_12_205');
+        
+    }
+    function async_upload_avatar_post() {
+        $stl = 12;
+        $config['upload_path'] = './icon_image/';
+        $config['allowed_types'] = 'png|jpeg|jpg';
+        $config['max_size'] = '1000';
+        $avartar_code = RandomStringId($stl);
+        $config['file_name'] = $avartar_code;
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload("avatarfile")) {
+            $error = array('error' => $this->upload->display_errors());
+        } else {
+            $data = array('uploaded_data' => $this->upload->data());
+            $user_id = $this->post('userid');
+            
+          //  $is_public = 1;
+          //  $avartar_code = RandomStringId($stl);
+        //    $path_name = $data['uploaded_data']['file_path'];
+            $file_name = $data['uploaded_data']['file_name'];
+//            $raw_name = $data['uploaded_data']['raw_name'];
+//            $video_ext = $data['uploaded_data']['file_ext'];
+            $avartar_to_save = array(
+                'avatar_icon' => $file_name,
+            );
+            $this->usermodel->save($avartar_to_save,$user_id);
+        }
+        $resp = ['status' => "success"];
+        $this->response($resp);
+    }
 
+
+    public function contains_date($date) {
+        if (strlen($date) < 10){
+            return false;
+        }else{
+            $a_d = substr($date, -10);
+            list($d, $m, $y ) = explode("_", $a_d);
+        if (checkdate($m, $d, $y)) {
+            echo "OK Date";
+        } else {
+            echo "BAD Date";
+        }
+            
+        }
+                
+        
     }
 
 }
