@@ -37,7 +37,7 @@ $attributes = array('class' => 'form-horizontal');
                             <td ><?php echo $post->sp_post_id; ?></td>
 				<td><?php echo $post->sp_post_name;?></td>
 				<td>
-				<?php echo btn_delete('dashboard/posts/delete/'. $post->sp_post_id,"Remove"); ?>
+				<?php echo btn_delete('ressources/posts/async_unload/tk/'.$this->tokenSession.'/loaded_id/'. $post->sp_post_id,"Remove"); ?>
 				</td>
 			</tr>
 	<?php endforeach;?>
@@ -127,7 +127,7 @@ $attributes = array('class' => 'form-horizontal');
                                 "<tr>"+
                                         "<td>"+items[i].sp_post_id+"</td>" +
                                         "<td>"+items[i].sp_post_name+"</td>"+
-                                        "<td><a href='"+items[i].loaded_id+"' >delete</a></td>"+
+                                        "<td><a href='<?php echo base_url()."ressources/posts/async_unlaod/tk/".$this->tokenSession."loaded_id/";?>"+items[i].loaded_id+"/format/json' >remove</a></td>"+
                                 "</tr>");
 
                         }

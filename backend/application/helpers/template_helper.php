@@ -136,13 +136,12 @@ function get_menu ($array, $child = FALSE)
             $active = $CI->uri->segment(1) == $item['post_slug'] ? TRUE : FALSE;
             if (isset($item['children']) && count($item['children'])) {
                 $str .= $active ? '<li class="dropdown active">' : '<li class="dropdown">';
-                $str .= '<a  class="dropdown-toggle" data-toggle="dropdown" href="' . site_url(e($item['post_slug'])) . '">' . e($item['post_title']);
+                $str .= '<a  class="dropdown-toggle" data-toggle="dropdown" href="' . site_url(e($item['post_slug'])) . '">' . e($item['post_name']);
                 $str .= '<span class="caret"></span></a>' . PHP_EOL;
                 $str .= get_menu($item['children'], TRUE);
-            }
-            else {
+            }else {
                 $str .= $active ? '<li class="active">' : '<li>';
-                $str .= '<a href="' . site_url($item['post_slug']) . '">' . e($item['post_title']) . '</a>';
+                $str .= '<a href="' . site_url($item['post_slug']) . '">' . e($item['post_name']) . '</a>';
             }
             $str .= '</li>' . PHP_EOL;
         }

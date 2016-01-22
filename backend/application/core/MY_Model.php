@@ -76,6 +76,14 @@ class MY_Model extends CI_Model {
 		$this->db->where($this->_table_name.".".$this->_primary_key, $id);
 		$this->db->limit(1);
 		$this->db->delete($this->_table_name);
+                return TRUE;
+                ///$this->db->affected_rows();
+               /* if( $this->db->affected_rows() >0){
+                    return TRUE;
+                }else{
+                    return FAlSE;
+                }*/
+
 	}
 
 
