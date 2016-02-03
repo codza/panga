@@ -9,7 +9,7 @@ class Admin_Controller extends MY_Controller {
 
         $this->load->library('user_agent');
         $this->load->library('session');
-        $this->load->model('usermodel');
+        $this->load->model('dashboard/usermodel');
 
 
         // Login check
