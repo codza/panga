@@ -1,5 +1,5 @@
 <?php
-class RoleModel extends MY_Model {
+class Rolemodel extends MY_Model {
 	
 	protected $_table_name = 'tbl_role';
 	protected $_primary_key = 'role_id';

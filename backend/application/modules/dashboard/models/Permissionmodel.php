@@ -1,5 +1,5 @@
 <?php
-class PermissionModel extends MY_Model {
+class Permissionmodel extends MY_Model {
 	
 	protected $_table_name = 'tbl_permission';
 	protected $_primary_key = 'perm_id';
@@ -17,7 +17,7 @@ class PermissionModel extends MY_Model {
         'PermissionName' => array(
             'field' => 'permissionname',
             'label' => 'Permession Name',
-            'rules' => 'trim|is_unique[tbl_permission.perm_name]|xss_clean'
+            'rules' => 'trim|is_unique[tbl_permission.perm_name]'
         ),
         'PermissionDescription' => array(
             'field' => 'permissiondescription',

@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class AccessManagement extends Admin_Controller {
+class Rabc extends Admin_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -14,17 +14,17 @@ class AccessManagement extends Admin_Controller {
     public function index() {
     //    $this->data['roles'] = $this->rolemodel->get();
     //    $this->data['subview'] = 'admin/role/_role_list';
-        $this->load->view('admin/_rabc_layout', $this->data);
+        $this->load->view('dashboard/_rabc_layout', $this->data);
     }
     public function view_roles() {
         $this->data['roles'] = $this->rolemodel->get();
-        $this->data['subview'] = 'admin/role/_role_list';
-        $this->load->view('admin/_rabc_layout', $this->data);
+        $this->data['subview'] = 'dashboard/role/_role_list';
+        $this->load->view('dashboard/_rabc_layout', $this->data);
     }
     public function view_permissions() {
         $this->data['permissions'] = $this->permissionmodel->get();
-        $this->data['subview'] = 'admin/permission/_permission_list';
-        $this->load->view('admin/_rabc_layout', $this->data);
+        $this->data['subview'] = 'dashboard/permission/_permission_list';
+        $this->load->view('dashboard/_rabc_layout', $this->data);
     }
 
     public function add_role() {
@@ -45,7 +45,7 @@ class AccessManagement extends Admin_Controller {
                 $this->data['errors'] = 'form validation error';
             } else {
                 $this->rolemodel->save($datatoinsert);
-                redirect('dashboard/accessmanagement/view_roles', 'refresh');
+                redirect('dashboard/rabc/view_roles', 'refresh');
             }
         } else {
             $datatoinsert = array(
@@ -53,15 +53,15 @@ class AccessManagement extends Admin_Controller {
             );
             $this->data["datatoinsert"] = $datatoinsert;
         }
-        $this->data['subview'] = 'admin/role/_new_role';
-        $this->load->view('admin/_rabc_layout', $this->data);
+        $this->data['subview'] = 'dashboard/role/_new_role';
+        $this->load->view('dashboard/_rabc_layout', $this->data);
     }
 
     public function edit_role($id = NULL) {
         if ($id) {
             $this->data['role'] = $this->rolemodel->get($id);
             if (count($this->data['role'])) {
-                $this->data['subview'] = 'admin/role/_edit_role';
+                $this->data['subview'] = 'dashboard/role/_edit_role';
             } else {
                 
             }
@@ -80,16 +80,16 @@ class AccessManagement extends Admin_Controller {
                 );
                 $data = $this->rolemodel->save($datatoupdate, $id);
                 $this->data['role'] = $this->rolemodel->get($id);
-                redirect('dashboard/accessmanagement/view_roles');
+                redirect('dashboard/rabc/view_roles');
             }/* */
         }
 
-        $this->load->view('admin/_rabc_layout', $this->data);
+        $this->load->view('dashboard/_rabc_layout', $this->data);
     }
 
     public function delete_role($id) {
         $this->rolemodel->delete($id);
-        redirect('dashboard/accessmanagement/view_roles', 'refresh');
+        redirect('dashboard/rabc/view_roles', 'refresh');
     }
 
     public function add_permission() {
@@ -115,7 +115,7 @@ class AccessManagement extends Admin_Controller {
                 $this->data['errors'] = 'form validation error';
             } else {
                 $this->permissionmodel->save($datatoinsert);
-                redirect('dashboard/accessmanagement/view_permissions', 'refresh');
+                redirect('dashboard/rabc/view_permissions', 'refresh');
             }
         } else {
             $datatoinsert = array(
@@ -124,15 +124,15 @@ class AccessManagement extends Admin_Controller {
             );
             $this->data["datatoinsert"] = $datatoinsert;
         }
-        $this->data['subview'] = 'admin/permission/_new_permission';
-        $this->load->view('admin/_rabc_layout', $this->data);
+        $this->data['subview'] = 'dashboard/permission/_new_permission';
+        $this->load->view('dashboard/_rabc_layout', $this->data);
     }
 
     public function edit_permission($id = NULL) {
         if ($id) {
             $this->data['permission'] = $this->permissionmodel->get($id);
             if (count($this->data['permission'])) {
-                $this->data['subview'] = 'admin/permission/_edit_permission';
+                $this->data['subview'] = 'dashboard/permission/_edit_permission';
             } else {
                 
             }
@@ -157,16 +157,16 @@ class AccessManagement extends Admin_Controller {
                 $this->permissionmodel->save($datatoupdate, $id);
 
                 $this->data['permission'] = $this->permissionmodel->get($id);
-                redirect('dashboard/accessmanagement/view_permissions');
+                redirect('dashboard/rabc/view_permissions');
             }/* */
         }
 
-        $this->load->view('admin/_rabc_layout', $this->data);
+        $this->load->view('dashboard/_rabc_layout', $this->data);
     }
 
     public function delete_permission($id) {
         $this->permissionmodel->delete($id);
-        redirect('dashboard/accessmanagement/view_permissions', 'refresh');
+        redirect('dashboard/rabc/view_permissions', 'refresh');
     }
 
 }

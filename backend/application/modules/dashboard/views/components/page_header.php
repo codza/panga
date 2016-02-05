@@ -7,11 +7,11 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/bootstrap/css/bootstrap.min.css'); ?>" />
 	<link rel="stylesheet" type="text/css" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/bootstrap/css/sticky-footer.css'); ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/bootstrap/css/bootstrap-switch.min.css'); ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/jquery-ui-1.11.0/css/jquery-ui.min.css'); ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/bootstrap/css/bootstrap-datepicker.css'); ?>" />
-
-    <link rel="stylesheet" type="text/css" href="<?php echo site_url('backend/css/admin.css'); ?>" >
+        <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/bootstrap/css/bootstrap-switch.min.css'); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/jquery-ui-1.11.0/css/jquery-ui.min.css'); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/bootstrap/css/bootstrap-datepicker.css'); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/bootstrap/css/typeaheadjs.css'); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo site_url('backend/css/admin.css'); ?>" >
 
 
     <!-- ############################################ -->
@@ -24,6 +24,7 @@
     <script src="<?php echo site_url('assets/bootstrap/js/bootstrap-switch.min.js'); ?>"></script>
     <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
     <script src="<?php echo site_url('assets/bootstrap/js/bootstrap-datepicker.js'); ?>"></script>
+    <script src="<?php echo site_url('assets/bootstrap/js/typeahead.bundle.js'); ?>"></script>
 
 
     <!-- Place inside the <head> of your HTML -->

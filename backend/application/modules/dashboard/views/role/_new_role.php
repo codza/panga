@@ -23,6 +23,6 @@ $attributes = array('class' => 'form-horizontal','role'=>'form');
 </fieldset>
     <div>
        
-        <?php  echo anchor('dashboard/accessmanagement', 'Back To List ', 'title="role list"');?>
+        <?php  echo anchor('dashboard/rabc', 'Back To List ', 'title="role list"');?>
     </div>
 </div>
