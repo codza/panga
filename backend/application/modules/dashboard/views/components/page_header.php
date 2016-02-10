@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php  ?></title>
+    <title><?php echo $this->site_acronym; ?></title>
     <meta charset="UTF-8" >
 	<!-- Bootstrap -->
 	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/bootstrap/css/bootstrap.min.css'); ?>" />

@@ -97,7 +97,7 @@ $autoload['helper'] = array('url', 'form','cms_helper','template_helper','system
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array('cms_config');
+$autoload['config'] = array('config_cms');
 
 /*
 | -------------------------------------------------------------------

@@ -68,31 +68,95 @@ $attributes = array('class' => 'form-horizontal');
         remote: {
             url: RESSOURCES_ROLEPERM_PERMISSION_URL,
             wildcard: '%QUERY%',
-     //       filter: function(data) {
+           filter: function(data) {
 
-            /*  var resultList = data.aaData.map(function (item) {
-              return item.name;
+           var resultList =[];
+          //console.log(data[1]);
+          var items = data[1].data;
+          for( var i=0; i < items.length; i++) {
+              resultList.push(items[i]);
+          }
+          return resultList;
 
-          });*/
-          //console.log(resultList);
-          //return data[1].data;
-
-  //     }
+       }
             
         }
 
     });
-    console.log(permissions);
+    //console.log(permissions);
     //   titles.initialize();
 
     $('#inputSearchPermission.typeahead').typeahead(null, {
-        name: 'permissions',
-       // display: 'perm_name',
-        displayKey: 'perm_name',
-        source: permissions
-    }).on('typeahead:selected', function (obj, datum) {
-    console.log(obj);
-    console.log(datum);
+        displayKey:"created_date",
+        display: "perm_name",
+        limit: 10,
+        source: permissions,
+    /*    templates: {
+        empty: [
+      '<div class="empty-message">',
+        'unable to find any Best Picture winners that match the current query',
+      '</div>'
+        ].join('\n'),
+        suggestion: function(data) {
+                return '<p><strong>' + data.perm_name + '</strong> – ' + data.created_date + '</p>';
+            }
+        },*/
+    }).on('typeahead:selected', function (obj, data) {
+        console.log("*********");
+    //console.log(obj);
+    console.log(data);
+    console.log(data.perm_id);
+                  var RESSOURCES_POSTS_URL_LOAD_TO_POST = "<?php echo RESSOURCES_POSTS_URL_LOAD_TO_POST; ?>";
+                    
+                    var postData = new FormData();
+                    var perm_id = data.perm_id;
+                    var role_id = "<?php echo $role->role_id; ?>";
+                    var tk      = "<?php echo $this->tokenSession; ?>";
+                    postData.append("tk", tk);
+                    postData.append("role_id", role_id);
+                    postData.append("perm_id", perm_id);
+                    console.log("********************************");
+                    $.ajax({
+                        datatype: "json",
+                        mimeType: "multipart/form-data",
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        method: "POST",
+                        url: RESSOURCES_POSTS_URL_LOAD_TO_POST,
+                        data: postData
+                    }).done(function (resp) {
+
+                        var Var_resp = JSON.parse(resp);
+                        //console.log(resp);
+                        console.log("/////////////////////////////");
+                        console.log(Var_resp);
+                        console.log("/////////////////////////////");
+                        
+
+                        if (Var_resp.status === "success") {
+                            
+                            
+                        var items = Var_resp.data;
+                //.html(): Clean HTML inside and append
+                        $("#loaded_posts_list tbody tr").remove();
+                        for( var i=0; i < items.length; i++) {
+                            $("#loaded_posts_list tbody").append(
+                             //   "<div class=''style='border:2px solid #000;'>" +
+                                "<tr>"+
+                                        "<td>"+items[i].sp_post_id+"</td>" +
+                                        "<td>"+items[i].sp_post_name+"</td>"+
+                                        "<td><a href='<?php echo base_url()."ressources/posts/async_unlaod/tk/".$this->tokenSession."loaded_id/";?>"+items[i].loaded_id+"/format/json' >remove</a></td>"+
+                                "</tr>");
+
+                        }
+                            
+                            ///location.reload();
+                        }
+
+                    });
+    
+    
 
     });
 

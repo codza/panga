@@ -118,19 +118,19 @@ class Roleperms extends REST_Controller
 
         if($this->get('name')){
             $searchColumn .="perm_name";
-            $searchTerm = $this->get('name');
+            $searchTerm = urldecode($this->get('name'));
         }
 
         $permissions = $this->permissionmodel->get_where_like($searchColumn , $searchTerm, false  );
 
-        $perm_resp = ["roles"=>$permissions];
+        $perm_resp = ["data"=>$permissions];
 
         if($permissions){
             $this->response(array(
                 $this->status[1],$perm_resp), 200); // 200 being the HTTP response code
         }else{
             $this->response(array(
-                $this->status[1], ["roles"=>"No Result"]
+                $this->status[1], ["data"=>"No Result"]
             ), 200);
         }
     }
@@ -155,7 +155,7 @@ class Roleperms extends REST_Controller
         }
         if($this->get('name')){
             $searchColumn .="post_name";
-            $searchTerm = $this->get('name');
+            $searchTerm = urldecode($this->get('name'));
         }
 
         $posts = $this->postmodel->get_where_like($searchColumn , $searchTerm, false  );
@@ -171,12 +171,12 @@ class Roleperms extends REST_Controller
             ), 200);
         }
     }
-    function async_loadpost_post() {
+    function async_addpermtorole_post() {
         
     //    $user_id = null;
-        $post_id = null;
-        $loaded_post_id = null;
-        $post = null;
+        $perm_id = null;
+        $role_id = null;
+
         $resp =null;
 
         //  $resp = null;

@@ -4,12 +4,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin_Controller extends MY_Controller {
     var $userSession;
     var $sessionToken;
+    var $site_name;
+    var $site_acronym;
+    
 	function __construct(){
 		parent::__construct();
 
         $this->load->library('user_agent');
         $this->load->library('session');
         $this->load->model('dashboard/usermodel');
+        $this->site_name =  $this->config->item("site_name");
+        $this->site_acronym =  $this->config->item("site_acronym");
+        
 
 
         // Login check
