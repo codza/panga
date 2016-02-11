@@ -45,7 +45,21 @@ $attributes = array('class' => 'form-horizontal');
         </div>
        
         <div class="col-lg-12">
-            result
+            <table class="table" id="role_perm_list">
+                <thead>
+                <tr>
+                    <td> ID </td><td> permission Name</td><td> </td>
+                </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td colspan="3"> No permission attached </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
         </div>
         
     </div>
@@ -59,9 +73,9 @@ $attributes = array('class' => 'form-horizontal');
 
     var RESSOURCES_ROLEPERM_PERMISSION_URL ="<?php echo RESSOURCES_ROLEPERM_PERMISSION_URL; ?>";
     var tk="<?php echo $this->tokenSession;?>";
-    
+
     RESSOURCES_ROLEPERM_PERMISSION_URL +="/tk/"+tk+"/format/json";
-    console.log(RESSOURCES_ROLEPERM_PERMISSION_URL);
+
     var permissions = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -86,26 +100,51 @@ $attributes = array('class' => 'form-horizontal');
     //console.log(permissions);
     //   titles.initialize();
 
+    $(function() {
+        // Handler for .ready() called.
+
+        var RESSOURCES_ROLEPERM_PERMS_BY_ROLE_ID_URL ="<?php echo RESSOURCES_ROLEPERM_PERMS_BY_ROLE_ID_URL; ?>";
+        var tk="<?php echo $this->tokenSession;?>";
+        var role_id ="<?php echo $role->role_id; ?>";
+
+
+        RESSOURCES_ROLEPERM_PERMS_BY_ROLE_ID_URL +="/"+role_id+"/tk/"+tk+"/format/json";
+       // console.log(RESSOURCES_ROLEPERM_PERMS_BY_ROLE_ID_URL);
+
+        $('#role_perm_list tbody tr').load(RESSOURCES_ROLEPERM_PERMS_BY_ROLE_ID_URL,function(resp){
+           // resp
+         /*  console.log("**********");
+            console.log(resp);
+            console.log("**********");
+            console.log("||||||||||");
+            console.log(status);
+            console.log("||||||||||");
+            console.log("##########");
+            console.log(data);
+            console.log("##########");*/
+
+                var var_resp = JSON.parse(resp);
+
+                if (var_resp[0].status == "success") {
+
+                    var items = var_resp[1].data;
+
+                   load_perm_list(items);
+                  //  console.log(var_resp);
+
+                }
+
+        });
+    });
+
     $('#inputSearchPermission.typeahead').typeahead(null, {
         displayKey:"created_date",
         display: "perm_name",
         limit: 10,
-        source: permissions,
-    /*    templates: {
-        empty: [
-      '<div class="empty-message">',
-        'unable to find any Best Picture winners that match the current query',
-      '</div>'
-        ].join('\n'),
-        suggestion: function(data) {
-                return '<p><strong>' + data.perm_name + '</strong> – ' + data.created_date + '</p>';
-            }
-        },*/
+        source: permissions
+
     }).on('typeahead:selected', function (obj, data) {
-        console.log("*********");
-    //console.log(obj);
-    console.log(data);
-    console.log(data.perm_id);
+
                   var RESSOURCES_ROLEPERM_ADD_PERM_TO_ROLE_URL = "<?php echo RESSOURCES_ROLEPERM_ADD_PERM_TO_ROLE_URL; ?>";
                     
                     var postData = new FormData();
@@ -115,7 +154,7 @@ $attributes = array('class' => 'form-horizontal');
                     postData.append("tk", tk);
                     postData.append("role_id", role_id);
                     postData.append("perm_id", perm_id);
-                    console.log("********************************");
+
                     $.ajax({
                         datatype: "json",
                         mimeType: "multipart/form-data",
@@ -126,39 +165,34 @@ $attributes = array('class' => 'form-horizontal');
                         url: RESSOURCES_ROLEPERM_ADD_PERM_TO_ROLE_URL,
                         data: postData
                     }).done(function (resp) {
-
                         var Var_resp = JSON.parse(resp);
-                        //console.log(resp);
-                        console.log("/////////////////////////////");
-                        console.log(Var_resp);
-                        console.log("/////////////////////////////");
-                        
 
                         if (Var_resp.status === "success") {
-                            
-                            
-               /*         var items = Var_resp.data;
-                //.html(): Clean HTML inside and append
-                        $("#loaded_posts_list tbody tr").remove();
-                        for( var i=0; i < items.length; i++) {
-                            $("#loaded_posts_list tbody").append(
-                             //   "<div class=''style='border:2px solid #000;'>" +
-                                "<tr>"+
-                                        "<td>"+items[i].sp_post_id+"</td>" +
-                                        "<td>"+items[i].sp_post_name+"</td>"+
-                                        "<td><a href='<?php echo base_url()."ressources/posts/async_unlaod/tk/".$this->tokenSession."loaded_id/";?>"+items[i].loaded_id+"/format/json' >remove</a></td>"+
-                                "</tr>");
 
-                        }
-                            
-                            ///location.reload();*/
+                        var items = Var_resp.data;
+
+                            load_perm_list(items);
+
                         }
 
                     });
-    
-    
 
     });
+
+    function load_perm_list( items ){
+        $("#role_perm_list tbody tr").remove();
+        for( var i=0; i < items.length; i++) {
+            $("#role_perm_list tbody").append(
+                //   "<div class=''style='border:2px solid #000;'>" +
+                "<tr>"+
+                "<td>"+items[i].role_perm_id+"</td>" +
+                "<td>"+items[i].perm_name+"</td>"+
+                "<td><a href='<?php echo base_url()."ressources/roleperms/async_removepermtorole/tk/".$this->tokenSession."/role_perm_id/";?>"+items[i].role_perm_id+"/format/json' >remove</a></td>"+
+                "</tr>");
+
+        }
+
+    }
 
 
 

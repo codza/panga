@@ -189,10 +189,7 @@ class Posts extends REST_Controller
 
 
         $loaded_id = $this->post('loaded_id');/**/
-        
-    /*    $resp = array("post_id"=>$post_id,
-            "loaded_post_id"=>$loaded_post_id,
-            "user_id" =>$this->request_user->user_id);*/
+
 
         if (is_null($loaded_id) ) {
           
@@ -207,7 +204,7 @@ class Posts extends REST_Controller
         $loadedelete = $this->loadedpostmodel->delete($loaded_id);
         $data = $this->loadedpostmodel->get_loaded_post_by_post_id($loadedpost->mp_post_id);
 
-       if(!$Loadedpost){
+       if(!$loadedpost){
            $status="failed";
        }
         $resp = [

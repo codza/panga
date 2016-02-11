@@ -14,7 +14,7 @@ class Rolepermmodel extends MY_Model {
 
     public function get($id = NULL, $single = FALSE) {
 
-           $this->db->select("$this->_table_name.* , mp.post_id  mp_post_id , mp.post_name  mp_post_name ,sp.post_id  sp_post_id , sp.post_name  sp_post_name ");
+           $this->db->select("$this->_table_name.* , perm.perm_name , role.role_name  ");
            $this->db->join('tbl_permission perm', " $this->_table_name.perm_id = perm.perm_id", 'left');
            $this->db->join('tbl_role role', " $this->_table_name.role_id = role.role_id", 'left');
         return parent::get($id, $single);

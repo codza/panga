@@ -7,8 +7,10 @@ class Rabc extends Admin_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('rolemodel');
-        $this->load->model('permissionmodel');
+        $this->load->model('dashboard/rolemodel');
+        $this->load->model('dashboard/permissionmodel');
+        $this->load->model('dashboard/rolepermmodel');
+
     }
 
     public function index() {
@@ -61,6 +63,7 @@ class Rabc extends Admin_Controller {
         if ($id) {
             $this->data['role'] = $this->rolemodel->get($id);
             if (count($this->data['role'])) {
+                $this->data['roleperms'] = $this->rolepermmodel->get_perms_by_role_id($id);
                 $this->data['subview'] = 'dashboard/role/_edit_role';
             } else {
                 

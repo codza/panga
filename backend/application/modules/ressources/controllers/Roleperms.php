@@ -18,7 +18,7 @@ class Roleperms extends REST_Controller
     {
         parent::__construct();
         $this->load->model('dashboard/permissionmodel');
-        $this->load->model('dashboard/Rolepermmodel');
+        $this->load->model('dashboard/rolepermmodel');
         $this->load->model('dashboard/rolemodel');
         $this->load->model('dashboard/usermodel');
         $this->resp=  array();
@@ -64,7 +64,6 @@ class Roleperms extends REST_Controller
 
     function role_get()
     {
-
     //    $this->response("hello world");
 
         if(!$this->get('id'))
@@ -92,23 +91,31 @@ class Roleperms extends REST_Controller
         //    $this->response("hello world");
         $searchColumn = "";
         $searchTerm   = "";
+        $resp_data = "";
 
-      if(!$this->get('name')  ){
+      if(!$this->get('perm_name') && !$this->get('role_id')  ){
             $this->response(array(
                 $this->status[2],$this->response_message[3]), 400);
         }
         /* */
 
-        if($this->get('name')){
+        if($this->get('perm_name')){
             $searchColumn .="perm_name";
-            $searchTerm = urldecode($this->get('name'));
+            $searchTerm = urldecode($this->get('perm_name'));
+            $resp_data = $this->permissionmodel->get_where_like($searchColumn , $searchTerm, false  );
         }
 
-        $permissions = $this->permissionmodel->get_where_like($searchColumn , $searchTerm, false  );
+        if($this->get('role_id')){
+            $searchTerm = urldecode($this->get('role_id'));
+            $resp_data = $this->rolepermmodel->get_perms_by_role_id($searchTerm);
 
-        $perm_resp = ["data"=>$permissions];
+        }
 
-        if($permissions){
+     ///   $resp_data = $this->permissionmodel->get_where_like($searchColumn , $searchTerm, false  );
+
+        $perm_resp = ["data"=>$resp_data];
+
+        if($resp_data){
             $this->response(array(
                 $this->status[1],$perm_resp), 200); // 200 being the HTTP response code
         }else{
@@ -118,22 +125,16 @@ class Roleperms extends REST_Controller
         }
     }
 
+
     function async_addpermtorole_post() {
-        
-    //    $user_id = null;
+
         $perm_id = null;
         $role_id = null;
 
         $resp =null;
 
-        //  $resp = null;
-    //    $user_id = (int) $this->post('user_id');
         $perm_id =  $this->post('perm_id');
-        $role_id = $this->post('role_id');/**/
-        
-    /*    $resp = array("post_id"=>$post_id,
-            "loaded_post_id"=>$loaded_post_id,
-            "user_id" =>$this->request_user->user_id);*/
+        $role_id = $this->post('role_id');
 
         if (is_null($perm_id) || is_null($perm_id) ) {
           
@@ -143,12 +144,9 @@ class Roleperms extends REST_Controller
         
         
         $datatoinsert = array("perm_id" =>(int) $perm_id, "role_id" => (int) $role_id);
-        $role_perm_id = $this->permissionmodel->save($datatoinsert);
+        $role_perm_id = $this->rolepermmodel->save($datatoinsert);
 
-        
-
-
-    $data = $this->permissionmodel->get_perms_by_role_id($role_id);
+        $data = $this->rolepermmodel->get_perms_by_role_id($role_id);
 
         $resp = [
             'status' => 'success','data'=>$data
@@ -161,7 +159,7 @@ class Roleperms extends REST_Controller
         }
     }
     
-    function async_unloadloadpost_post() {
+    function async_removepermtorole_post() {
         
         $loaded_id = null;
         $status ="success";
@@ -169,26 +167,27 @@ class Roleperms extends REST_Controller
         $resp =null;
 
 
-        $loaded_id = $this->post('loaded_id');/**/
+        $role_perm_id = $this->post('role_perm_id');/**/
         
     /*    $resp = array("post_id"=>$post_id,
             "loaded_post_id"=>$loaded_post_id,
             "user_id" =>$this->request_user->user_id);*/
 
-        if (is_null($loaded_id) ) {
+        if (is_null($role_perm_id) ) {
           
             $this->response(array(
                 $this->status[2],$this->response_message[3])
                     ,200);
         }
         
-        $loadedpost = $this->loadedpostmodel->get($loaded_id);
+        $roleperm = $this->rolepermmodel->get($role_perm_id);
         
-        //$datatoinsert = array("post_id" =>(int) $post_id, "user_id" => (int) $this->request_user->user_id, "loaded_post_id" => (int) $loaded_post_id);
-        $loadedelete = $this->loadedpostmodel->delete($loaded_id);
-        $data = $this->loadedpostmodel->get_loaded_post_by_post_id($loadedpost->mp_post_id);
 
-       if(!$Loadedpost){
+        $rolepermdelete = $this->rolepermmodel->delete($role_perm_id);
+
+        $data = $this->rolepermmodel->get_perms_by_role_id($roleperm->role_id);
+
+       if(!$rolepermdelete){
            $status="failed";
        }
         $resp = [
