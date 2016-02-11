@@ -106,7 +106,7 @@ $attributes = array('class' => 'form-horizontal');
     //console.log(obj);
     console.log(data);
     console.log(data.perm_id);
-                  var RESSOURCES_POSTS_URL_LOAD_TO_POST = "<?php echo RESSOURCES_POSTS_URL_LOAD_TO_POST; ?>";
+                  var RESSOURCES_ROLEPERM_ADD_PERM_TO_ROLE_URL = "<?php echo RESSOURCES_ROLEPERM_ADD_PERM_TO_ROLE_URL; ?>";
                     
                     var postData = new FormData();
                     var perm_id = data.perm_id;
@@ -123,7 +123,7 @@ $attributes = array('class' => 'form-horizontal');
                         cache: false,
                         processData: false,
                         method: "POST",
-                        url: RESSOURCES_POSTS_URL_LOAD_TO_POST,
+                        url: RESSOURCES_ROLEPERM_ADD_PERM_TO_ROLE_URL,
                         data: postData
                     }).done(function (resp) {
 
@@ -137,7 +137,7 @@ $attributes = array('class' => 'form-horizontal');
                         if (Var_resp.status === "success") {
                             
                             
-                        var items = Var_resp.data;
+               /*         var items = Var_resp.data;
                 //.html(): Clean HTML inside and append
                         $("#loaded_posts_list tbody tr").remove();
                         for( var i=0; i < items.length; i++) {
@@ -151,7 +151,7 @@ $attributes = array('class' => 'form-horizontal');
 
                         }
                             
-                            ///location.reload();
+                            ///location.reload();*/
                         }
 
                     });
