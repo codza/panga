@@ -111,29 +111,14 @@ $attributes = array('class' => 'form-horizontal');
         RESSOURCES_ROLEPERM_PERMS_BY_ROLE_ID_URL +="/"+role_id+"/tk/"+tk+"/format/json";
        // console.log(RESSOURCES_ROLEPERM_PERMS_BY_ROLE_ID_URL);
 
-        $('#role_perm_list tbody tr').load(RESSOURCES_ROLEPERM_PERMS_BY_ROLE_ID_URL,function(resp){
-           // resp
-         /*  console.log("**********");
-            console.log(resp);
-            console.log("**********");
-            console.log("||||||||||");
-            console.log(status);
-            console.log("||||||||||");
-            console.log("##########");
-            console.log(data);
-            console.log("##########");*/
+        $('#role_perm_list tbody tr').load(RESSOURCES_ROLEPERM_PERMS_BY_ROLE_ID_URL ,function(resp){
 
                 var var_resp = JSON.parse(resp);
 
                 if (var_resp[0].status == "success") {
-
                     var items = var_resp[1].data;
-
                    load_perm_list(items);
-                  //  console.log(var_resp);
-
                 }
-
         });
     });
 
@@ -187,10 +172,62 @@ $attributes = array('class' => 'form-horizontal');
                 "<tr>"+
                 "<td>"+items[i].role_perm_id+"</td>" +
                 "<td>"+items[i].perm_name+"</td>"+
-                "<td><a href='<?php echo base_url()."ressources/roleperms/async_removepermtorole/tk/".$this->tokenSession."/role_perm_id/";?>"+items[i].role_perm_id+"/format/json' >remove</a></td>"+
+                "<td><a class='remove_permission' data-newline-rolepermid='"+items[i].role_perm_id+"' data-newline-tokensession='<?php echo $this->tokenSession; ?>' href='<?php echo base_url()."ressources/roleperms/async_removepermtorole/format/json"; ?>'> remove</a></td>"+
                 "</tr>");
 
         }
+
+        $(".remove_permission").click(function (e) {
+            var RESSOURCES_POSTS_URL_LOAD_TO_POST = "<?php echo RESSOURCES_POSTS_URL_LOAD_TO_POST; ?>";
+            var role_perm_id = $(this).data("newlineRolepermid");
+            var tokenSession = $(this).data("newlineTokensession");
+            var url = $(this).attr('href');
+            var postData = new FormData();
+
+            postData.append("role_perm_id", role_perm_id);
+            postData.append("tk", tokenSession);
+            postData.append("loaded_post_id", post_to_load_id);
+
+            $.ajax({
+                datatype: "json",
+                mimeType: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                method: "POST",
+                url: url,
+                data: postData
+            }).done(function (resp) {
+
+                var Var_resp = JSON.parse(resp);
+
+                if (Var_resp.status === "success") {
+
+
+                    var items = Var_resp.data;
+                    //.html(): Clean HTML inside and append
+                    $("#loaded_posts_list tbody tr").remove();
+                    for( var i=0; i < items.length; i++) {
+                        $("#loaded_posts_list tbody").append(
+                            //   "<div class=''style='border:2px solid #000;'>" +
+                            "<tr>"+
+                            "<td>"+items[i].sp_post_id+"</td>" +
+                            "<td>"+items[i].sp_post_name+"</td>"+
+                            "<td><a href='<?php echo base_url()."ressources/posts/async_unlaod/tk/".$this->tokenSession."loaded_id/";?>"+items[i].loaded_id+"/format/json' >remove</a></td>"+
+                            "</tr>");
+
+                    }
+
+                    ///location.reload();
+                }
+
+            });
+            e.preventDefault();
+            console.log("********************************");
+
+        });
+
+
 
     }
 
