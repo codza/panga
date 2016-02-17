@@ -34,12 +34,19 @@ class Rolepermmodel extends MY_Model {
 
         $roleperms = $this->get_by(
                 array(
-            "$this->_table_name.role_id" => $role_id,
-         //   "$this->_table_name.liked_or_unliked" => $lorul
+            "$this->_table_name.role_id" => $role_id
                 ), FALSE
         );
-
         return $roleperms;
+    }
+    public function get_array_perms_by_role_id($role_id='1'){
+     //   $perms_array = [];
+        $this->db->select(" perm.perm_name  ");
+        $this->db->join('tbl_permission perm', " $this->_table_name.perm_id = perm.perm_id", 'left');
+        $this->db->join('tbl_role role', " $this->_table_name.role_id = role.role_id", 'left');
+        $this->db->where(array($this->_table_name.".role_id "=> $role_id));
+
+        return $this->db->get($this->_table_name)->result_array();
     }
 
     public function get_roles_by_perm_id($perm_id) {

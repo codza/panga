@@ -43,7 +43,7 @@ $attributes = array('class' => 'form-horizontal');
                 </div>
             <?php echo form_close();?>
         </div>
-       
+
         <div class="col-lg-12">
             <table class="table" id="role_perm_list">
                 <thead>
@@ -61,9 +61,9 @@ $attributes = array('class' => 'form-horizontal');
 
             </table>
         </div>
-        
+
     </div>
-    
+
 </div>
 
 <div>
@@ -93,7 +93,7 @@ $attributes = array('class' => 'form-horizontal');
           return resultList;
 
        }
-            
+
         }
 
     });
@@ -131,7 +131,7 @@ $attributes = array('class' => 'form-horizontal');
     }).on('typeahead:selected', function (obj, data) {
 
                   var RESSOURCES_ROLEPERM_ADD_PERM_TO_ROLE_URL = "<?php echo RESSOURCES_ROLEPERM_ADD_PERM_TO_ROLE_URL; ?>";
-                    
+
                     var postData = new FormData();
                     var perm_id = data.perm_id;
                     var role_id = "<?php echo $role->role_id; ?>";
@@ -178,7 +178,7 @@ $attributes = array('class' => 'form-horizontal');
         }
 
         $(".remove_permission").click(function (e) {
-            var RESSOURCES_POSTS_URL_LOAD_TO_POST = "<?php echo RESSOURCES_POSTS_URL_LOAD_TO_POST; ?>";
+            e.preventDefault();
             var role_perm_id = $(this).data("newlineRolepermid");
             var tokenSession = $(this).data("newlineTokensession");
             var url = $(this).attr('href');
@@ -186,7 +186,7 @@ $attributes = array('class' => 'form-horizontal');
 
             postData.append("role_perm_id", role_perm_id);
             postData.append("tk", tokenSession);
-            postData.append("loaded_post_id", post_to_load_id);
+           // postData.append("loaded_post_id", post_to_load_id);
 
             $.ajax({
                 datatype: "json",
@@ -203,26 +203,12 @@ $attributes = array('class' => 'form-horizontal');
 
                 if (Var_resp.status === "success") {
 
-
                     var items = Var_resp.data;
-                    //.html(): Clean HTML inside and append
-                    $("#loaded_posts_list tbody tr").remove();
-                    for( var i=0; i < items.length; i++) {
-                        $("#loaded_posts_list tbody").append(
-                            //   "<div class=''style='border:2px solid #000;'>" +
-                            "<tr>"+
-                            "<td>"+items[i].sp_post_id+"</td>" +
-                            "<td>"+items[i].sp_post_name+"</td>"+
-                            "<td><a href='<?php echo base_url()."ressources/posts/async_unlaod/tk/".$this->tokenSession."loaded_id/";?>"+items[i].loaded_id+"/format/json' >remove</a></td>"+
-                            "</tr>");
-
-                    }
-
-                    ///location.reload();
+                    load_perm_list(items);
                 }
 
             });
-            e.preventDefault();
+
             console.log("********************************");
 
         });

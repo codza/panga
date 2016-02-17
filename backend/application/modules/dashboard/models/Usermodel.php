@@ -15,6 +15,7 @@ class Usermodel extends MY_Model {
     public function get($id = NULL, $single = FALSE){
         return parent::get($id,$single);
     }
+
     function getAllButCurrentUser($ids=array('1')){
         /*
          $this->data['users'] = $this->usermodel->get_by(array(
@@ -75,18 +76,6 @@ class Usermodel extends MY_Model {
             'password' => $this->hash($pwd),
                 ), TRUE);
 
-      /*  if (count($user)) {
-            // authenticate user
-            $userAuth = array(
-                'user_id' => $user->user_id,
-                'user_token'=> $user->user_token,
-                'username' => $user->username,
-                'email' => $user->email,
-                'logged_in' => TRUE,
-            );
-
-        }*/
-      // echo  $this->db->last_query();
     return $user;
     }
 
@@ -118,6 +107,12 @@ class Usermodel extends MY_Model {
             );
         }
         return $userAuth;
+    }
+    public function getUserRoleByUserID($user_id){
+        $this->db->select("$this->_table_name.username, $this->_table_name.user_token, role.role_name");
+
+        $this->db->join('tbl_role_perm role_perm'," $this->_table_name.user_role = role_perm.role_id","LEFT");
+
     }
 
 

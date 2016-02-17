@@ -35,9 +35,9 @@ $attributes = array('class' => 'form-horizontal');
             <label class="col-md-4 control-label" for="inputUserType">User Type</label>
             <div class="col-md-4">
                 <?php
-                $options = array(1 => "Administrator", 2 => "Web Adnin", 3 => 'Author');
+               // $roles_option = array(1 => "Administrator", 2 => "Web Adnin", 3 => 'Author');
                 $attr = 'id="inputUserType" class="form-control" ';
-                echo form_dropdown('usertype', $options, $user->user_role, $attr);
+                echo form_dropdown('usertype', $roles_option, $user->user_role, $attr);
                 ?>
             </div>
         </div>

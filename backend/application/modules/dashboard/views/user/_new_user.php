@@ -43,9 +43,9 @@ $attributes = array('class' => 'form-horizontal');
                 <?php
                 ($datatoinsert["user_role"] == null) ? $usertypeid = "2" : $usertypeid = $datatoinsert["user_role"];
 
-                $options = array(1 => "Administrator", 2 => "Web Admin", 3 => 'Author');
+            //    $options = array(1 => "Administrator", 2 => "Web Admin", 3 => 'Author');
                 $attr = 'id="inputUserType" class="form-control"';
-                echo form_dropdown('usertype', $options, $usertypeid, $attr);
+                echo form_dropdown('usertype', $roles_option, $usertypeid, $attr);
                 ?>
 
             </div>
@@ -70,6 +70,11 @@ $attributes = array('class' => 'form-horizontal');
             </div>
         </div>
         <?php echo form_close(); ?>
+        <?php echo "<br>*********************"; ?>
+        <?php var_dump($roles_option); ?>
+        <?php echo "<br>*********************"; ?>
+
+
     <hr>
     <div>
         <?php echo anchor('dashboard/users', 'Back To List ', 'title="user list"'); ?>

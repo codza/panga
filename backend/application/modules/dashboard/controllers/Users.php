@@ -7,6 +7,9 @@ class Users extends Admin_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model("dashboard/Rolemodel","rolemodel");
+        $this->data['roles_option'] = $this->rolemodel->get_array_id_name();
+
     }
 
     public function index() {
@@ -200,10 +203,37 @@ class Users extends Admin_Controller {
         echo "######################################<br>";
         echo $this->session->user_info['user_token'] . "<br>";
         echo "######################################<br>";
-        var_dump($this->usermodel->getUserByToken($this->session->user_info['user_token']));
+        var_dump($user=$this->usermodel->getUserByToken($this->session->user_info['user_token']));
         echo "######################################<br>";
         echo "1111111111111111111111111111111111111<br>";
-        $value = $this->contains_date('world_aids_day_celebrations_02_12_205');
+        echo "<br>############<br>";
+        $this->load->model("dashboard/Rolepermmodel","rolepermmodel");
+        $perm = $this->rolepermmodel->get_array_perms_by_role_id($user->user_role);
+        var_dump($perm);
+        echo "<br>############<br>";
+      //  array_key_exists('first', $perm);
+
+        function perm_exits($PermissionsArray, $permToSearch){
+            foreach ($PermissionsArray as $perm)
+            {
+                if (strcmp( strtolower(trim($perm['perm_name'])), strtolower (trim($permToSearch)))==0) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+
+        if(perm_exits($perm ,'deleteuser') ){
+        echo "exits";
+        }
+        else{
+            echo "doesn't exits";
+        }
+
+
+
+
         
     }
     function async_upload_avatar_post() {
