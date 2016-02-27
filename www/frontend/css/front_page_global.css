@@ -1,59 +1,51 @@
 html, body {
 
     width:100%;
+    padding-top: 25px;
     /*height:100%;*/
-    background-color: #F5F5F5;
-/*    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+    /*background-color: #F5F5F5;*/
+    background-color: #F6F1F1;
+    /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
     font-family: "Noto Serif", "Times New Roman",  serif;
 
 }
 .rhu-logo{
     height:50px;
-    display: block;
-    margin: 0 auto;
 }
 .rhu-reset-pm{
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
 }
-
-.bottom-align-text {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
 .main-content{
 
     background-color: #ebe6e5;
-   /* height: 100%;*/
+    /* height: 100%;*/
     min-width:90%;
 
-   /* min-height:100%;*/
+    /* min-height:100%;*/
     margin: 0px auto;
 }
 
-/**************** ************** **************/
-/**************** navigation bar **************/
-/**************** ************** **************/
 #rhu_navbar {
     padding-right: 45px;
     padding-left: 45px;
- /*   position: absolute;
-    bottom: 0;
-    right: 0;*/
+    /*   position: absolute;
+       bottom: 0;
+       right: 0;*/
 }
 
 .rhu_navbar_header{
 
 }
 .rhu_navbar {
-    background: #A14535;
- /*   background: #006000;*/
-    /*height: 75px;*/
+    background: #CD0A1B;
+ /*   height: 50px;*/
     margin: auto auto 0px auto;
     padding: 0px 0px 0px 0px;
     border: none;
     border-radius: 0px;
+    border-bottom: 5px solid #01101E;
+    font-family:"brandon-grotesque",sans-serif;
 }
 /*.rhu_navbar_brand {
     float: none;
@@ -62,54 +54,23 @@ html, body {
 
 }*/
 .navbar-header a.rhu_navbar_brand {
-   /* float: none;*/
+    /* float: none;*/
+    font-family: "Open Sans";
     font-weight: bold;
     word-spacing: 1px;
     font-size:22px;
     height: 100%;
-   /* padding: 0px 15px;*/
+    padding: 0px 15px;
     color: #fff;
-
 }
 .navbar-header a.rhu_navbar_brand:hover{
     /* float: none;*/
     font-weight: bold;
     font-size:22px;
     height: 100%;
-   /* padding: 0px 15px;*/
-    color: #D1A595;
+    padding: 0px 15px;
+    color: #DCDCDC;
 }
-
-
-
-.navbar-inverse .navbar-nav>li>a {
-    color: #ffffff;
-    font-weight: bold;
-    text-transform: capitalize;
-}
-
-/*.navbar-inverse .navbar-nav>li>a:first-letter {
-    text-transform: uppercase;
-}*/
-
-.navbar-inverse .navbar-nav>li>a:hover {
-    color: #D1A595;
-    font-weight: bold;
-}
-.navbar-inverse .navbar-nav>li.active >a , .navbar-inverse .navbar-nav>li.active >a:hover {
-    /*color: #231F20;*/
-    color: #c9bf99;
-    font-weight: bold;
-    background-color: rgba(8, 8, 8, 0);
-}
-
-
-/**************** ************** **************/
-/**************** ************** **************/
-
-
-
-
 .rhu_post{
     text-align: justify;
     min-height: 100%;
@@ -121,7 +82,7 @@ html, body {
     border-radius: 5px;
     margin: 5px 0px 5px 0px;
     padding: 5px 35px 5px 0px;
-   /* padding: 5px 0px 5px 0px;*/
+    /* padding: 5px 0px 5px 0px;*/
 }
 .rhu_post_card h1{
     font-size: 45px;
@@ -217,6 +178,12 @@ html, body {
     width: 100%;
     height: 100%;
 }
+/*.rhu_image{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+}*/
 
 .rhu-overview-container{
     margin: 0px 0px 0px 0px;
@@ -254,7 +221,7 @@ html, body {
 }
 
 .carousel-caption h1:first-letter{
-text-transform: uppercase;
+    text-transform: uppercase;
 }
 
 .carousel-caption p{
@@ -286,6 +253,27 @@ text-transform: uppercase;
 .rhu_staff_members h5{
     font-weight: bold;
 }
+.navbar-inverse .navbar-nav>li>a {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav>li>a:first-letter {
+    text-transform: uppercase;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #ffffff;
+    font-weight: bold;
+}
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #DCDCDC;
+    font-weight: bold;
+}
+.navbar-inverse .navbar-nav>li.active >a , .navbar-inverse .navbar-nav>li.active >a:hover {
+    color: #EBEBEB;
+    font-weight: bold;
+    background-color: rgba(8, 8, 8, 0);
+}
 .rhu_thumbnail{
     border: none;
     padding: 0px;
@@ -298,7 +286,7 @@ text-transform: uppercase;
 
 }
 .rhu_image_thumbnail{
-border-radius: 5px;
+    border-radius: 5px;
 }
 
 /* link style*/
@@ -307,27 +295,28 @@ border-radius: 5px;
 /* here goes the footer cascading style sheet*/
 #footer {
 
-    background-color: #231F20;
+    background-color: #00111D;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
 #footer h4 {
-    color: white;
+    color: #E40000;
+    font-weight: bold;
     text-transform: uppercase;
     padding-bottom: 5px;
 }
 
 
 #footer p {
-    color: #c9bf99;
+    color: #777d82;
     margin-bottom: 0px;
     font-size: 16px;
 }
 
 #footer p a {
     display: inline-block;
-    color: #c9bf99;
+    color: #777d82;
     margin-bottom: 0px;
     font-size: 16px;
     text-decoration: none;
@@ -338,7 +327,7 @@ border-radius: 5px;
 }
 
 #footer p a:hover {
-    color: #F0EDE4;
+    color: #fcfcfc;
     margin-bottom: 0px;
     font-size: 16px;
     text-decoration: none;
@@ -351,7 +340,7 @@ border-radius: 5px;
 
 
 #footer div.rhu_date_footer p {
-    color: #ffffff;
+    color: #777d82;
 }
 
 

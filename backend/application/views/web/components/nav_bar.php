@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse rhu_navbar" role="navigation" xmlns="http://www.w3.org/1999/html">
+<nav class="navbar navbar-inverse navbar-fixed-top rhu_navbar" role="navigation" >
     <div class="container-fluid" id="rhu_navbar" >
         <div class="navbar-header rhu_navbar_header align-center">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-nlbar-collapse">
@@ -16,8 +16,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
 
         <div class="collapse navbar-collapse navbar-nlbar-collapse pull-right bottom-align-text"  >
-            <?php echo get_menu($menu);
-// get_primary_menu($primary_posts); ?>
+            <?php
+            ///echo get_menu($menu);
+            echo get_primary_menu($primary_posts); ?>
         </div>
         <!-- /.navbar-collapse -->
     </div>

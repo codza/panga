@@ -18,7 +18,7 @@ class Pages extends Frontend_Controller{
 
         $this->data['primary_posts'] = $this->postmodel->get_primary_posts();
         
-        $this->data['menu'] = $this->postmodel->get_nested();
+      //  $this->data['menu'] = $this->postmodel->get_nested();
 
 
       //  $this->data['posts'] = $this->postmodel->get(7);
