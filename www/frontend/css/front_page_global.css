@@ -18,7 +18,7 @@ html, body {
 }
 .main-content{
 
-    background-color: #ebe6e5;
+    background-color: transparent;
     /* height: 100%;*/
     min-width:90%;
 
@@ -39,7 +39,9 @@ html, body {
 }
 .rhu_navbar {
     background: #CD0A1B;
- /*   height: 50px;*/
+
+    /*  background: #AA1111;*/
+   /*   height: 50px;*/
     margin: auto auto 0px auto;
     padding: 0px 0px 0px 0px;
     border: none;
@@ -194,9 +196,9 @@ html, body {
 }
 .rhu-post-container{
     margin: 5px auto 5px auto;
-    padding: 5px 10px 5px 10px;
+    padding: 5px 0px 5px 0px;
 
-    background-color: #fff;
+    background-color: transparent;
 
 }
 

@@ -9,9 +9,6 @@ $this->load->view('web/components/media');
         echo $post->post_content;
         ?>
         </div>
-        <div >
-            Author: <?php echo e($post->first_name)." ".strtoupper(e($post->last_name));?> <br>
-            Published date:<?php echo date(" D, d/ m / Y", strtotime($post->created_date)); ?>
-        </div>
+
     </div>
 </div>
