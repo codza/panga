@@ -63,7 +63,7 @@ html, body {
     font-size:22px;
     height: 100%;
     padding: 0px 15px;
-    color: #fff;
+    color: #FFFFFF;
 }
 .navbar-header a.rhu_navbar_brand:hover{
     /* float: none;*/
@@ -272,7 +272,7 @@ html, body {
     font-weight: bold;
 }
 .navbar-inverse .navbar-nav>li.active >a , .navbar-inverse .navbar-nav>li.active >a:hover {
-    color: #EBEBEB;
+    color: #01101E;
     font-weight: bold;
     background-color: rgba(8, 8, 8, 0);
 }
