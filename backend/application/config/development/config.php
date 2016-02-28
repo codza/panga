@@ -37,7 +37,7 @@ function __autoload($classname) {
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/panga/www/';
+$config['base_url'] = 'http://revivinghopeuganda.dev';
 
 /*
 |--------------------------------------------------------------------------

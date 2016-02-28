@@ -6,7 +6,7 @@ $pangaDir="../backend/";
 		case 'C:\wamp\www\02_BASE\panga\www':
 			define('ENVIRONMENT', 'development');
 		break;
-                case '/home/lodz/phpwebsite/panga/www':
+                case '/home/lodza/phpwebsite/panga/www':
 			define('ENVIRONMENT', 'development');
 		break;
 		default:
