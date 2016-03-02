@@ -31,34 +31,46 @@ $attributes = array('class' => 'form-horizontal');
         </tr>
         </thead>
         <tbody>
-          
-        <?php if(count($loadedposts)): foreach($loadedposts as $post):?>
-			<tr>
-                            <td ><?php echo $post->sp_post_id; ?></td>
-				<td><?php echo $post->sp_post_name;?></td>
-				<td>
-				<?php echo btn_delete('ressources/posts/async_unload/tk/'.$this->tokenSession.'/loaded_id/'. $post->sp_post_id,"Remove"); ?>
-				</td>
-			</tr>
-	<?php endforeach;?>
-        <?php else: ?>
+
 		<tr>
 			<td colspan="3"> No post could be found </td>
 		</tr>
 
-	<?php endif;?>
+
         </tbody>
         
     </table>
     
 </div>
 
- 
+
 
 
 <script>
     $(function() {
     /*********************************************/
+        var RESSOURCES_LOADEDPOSTS_BY_URL ="<?php echo RESSOURCES_LOADEDPOSTS_BY_URL; ?>";
+        var tk="<?php echo $this->tokenSession;?>";
+        var post_id ="<?php echo $post->post_id; ?>";
+
+
+        RESSOURCES_LOADEDPOSTS_BY_URL +="/post_id/"+post_id+"/tk/"+tk+"/format/json";
+        console.log(RESSOURCES_LOADEDPOSTS_BY_URL);
+
+        $('#loaded_posts_list tbody tr').load(RESSOURCES_LOADEDPOSTS_BY_URL ,function(resp){
+
+        ///    var var_resp = JSON.parse(resp);
+
+            if (resp[0].status == "success") {
+                var items = resp[1].data;
+                load_post_list(items);
+            }
+        });
+
+
+        ///////////////////
+
+
 
 
     $("#inputSearchPost").keypress(function(){
@@ -113,33 +125,67 @@ $attributes = array('class' => 'form-horizontal');
                         console.log("/////////////////////////////");
                         console.log(Var_resp);
                         console.log("/////////////////////////////");
-                        
+
 
                         if (Var_resp.status === "success") {
-                            
-                            
-                        var items = Var_resp.data;
-                //.html(): Clean HTML inside and append
-                        $("#loaded_posts_list tbody tr").remove();
-                        for( var i=0; i < items.length; i++) {
-                            $("#loaded_posts_list tbody").append(
-                             //   "<div class=''style='border:2px solid #000;'>" +
-                                "<tr>"+
-                                        "<td>"+items[i].sp_post_id+"</td>" +
-                                        "<td>"+items[i].sp_post_name+"</td>"+
-                                        "<td><a href='<?php echo base_url()."ressources/posts/async_unlaod/tk/".$this->tokenSession."loaded_id/";?>"+items[i].loaded_id+"/format/json' >remove</a></td>"+
-                                "</tr>");
 
-                        }
-                            
-                            ///location.reload();
+
+                            var items = Var_resp.data;
+                            //.html(): Clean HTML inside and append
+                            $("#loaded_posts_list tbody tr").remove();
+                            for (var i = 0; i < items.length; i++) {
+                                $("#loaded_posts_list tbody").append(
+                                    //   "<div class=''style='border:2px solid #000;'>" +
+                                    "<tr>" +
+                                    "<td>" + items[i].sp_post_id + "</td>" +
+                                    "<td>" + items[i].sp_post_name + "</td>" +
+                                    "<td><a class='remove_too_post' data-newline-loadedid='" + items[i].loaded_id + "' data-newline-tokensession='' href='<?php echo base_url() . "ressources/posts/async_unlaod/tk/" . $this->tokenSession . "loaded_id/";?>/format/json' >remove</a></td>" +
+                                    "</tr>");
+
+                            }
+                            /*    $(".remove_too_post").click(function (x) {
+                             x.preventDefault();
+                             var loaded_id = $(this).data("newlineLoadedid");
+                             var tokenSession = $(this).data("newlineTokensession");
+                             var url = $(this).attr('href');
+                             var postData = new FormData();
+
+                             postData.append("loaded_id", loaded_id);
+                             postData.append("tk", tokenSession);
+                             // postData.append("loaded_post_id", post_to_load_id);
+
+                             $.ajax({
+                             datatype: "json",
+                             mimeType: "multipart/form-data",
+                             contentType: false,
+                             cache: false,
+                             processData: false,
+                             method: "POST",
+                             url: url,
+                             data: postData
+                             }).done(function (resp) {
+
+                             var Var_resp = JSON.parse(resp);
+
+                             if (Var_resp.status === "success") {
+
+                             var items = Var_resp.data;
+                             load_perm_list(items);
+                             }
+
+                             });
+
+
+
+                             ///location.reload();
+                             });*/
                         }
 
                     });
                     e.preventDefault();
                     console.log("********************************");
 
-                }); 
+                });
 
 
             });
@@ -148,6 +194,59 @@ $attributes = array('class' => 'form-horizontal');
     });
 
     /*********************************************/
+
+        function load_perm_list( items ){
+            $("#role_perm_list tbody tr").remove();
+            for( var i=0; i < items.length; i++) {
+                $("#role_perm_list tbody").append(
+                    //   "<div class=''style='border:2px solid #000;'>" +
+                    "<tr>"+
+                    "<td>"+items[i].sp_post_id+"</td>" +
+                    "<td>"+items[i].sp_post_name+"</td>"+
+                    "<td><a class='remove_permission' data-newline-rolepermid='"+items[i].sp_post_id+"' data-newline-tokensession='<?php echo $this->tokenSession; ?>' href='<?php echo base_url()."ressources/roleperms/async_removepermtorole/format/json"; ?>'> remove</a></td>"+
+                    "</tr>");
+
+            }
+
+            $(".remove_permission").click(function (e) {
+                e.preventDefault();
+                var role_perm_id = $(this).data("newlineRolepermid");
+                var tokenSession = $(this).data("newlineTokensession");
+                var url = $(this).attr('href');
+                var postData = new FormData();
+
+                postData.append("role_perm_id", role_perm_id);
+                postData.append("tk", tokenSession);
+                // postData.append("loaded_post_id", post_to_load_id);
+
+                $.ajax({
+                    datatype: "json",
+                    mimeType: "multipart/form-data",
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    method: "POST",
+                    url: url,
+                    data: postData
+                }).done(function (resp) {
+
+                    var Var_resp = JSON.parse(resp);
+
+                    if (Var_resp.status === "success") {
+
+                        var items = Var_resp.data;
+                        load_perm_list(items);
+                    }
+
+                });
+
+                console.log("********************************");
+
+            });
+
+
+
+        }
 
 
 

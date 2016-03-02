@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Posts extends REST_Controller
+class Loadedposts extends REST_Controller
 {
     var $resp=[];
     var $status=[
@@ -17,7 +17,7 @@ class Posts extends REST_Controller
     public function __construct ()
     {
         parent::__construct();
-        $this->load->model('dashboard/postmodel');
+///        $this->load->model('dashboard/postmodel');
         $this->load->model('dashboard/usermodel');
         $this->load->model('dashboard/loadedpostmodel');
         $this->resp=  array();
@@ -77,56 +77,33 @@ class Posts extends REST_Controller
         $users = $this->usermodel->get();
         $this->response("hello world");
     }*/
-    function post_get()
-    {
-
-    //    $this->response("hello world");
-
-        if(!$this->get('id'))
-        {
-            $this->response(array(
-                $this->status[2], $this->response_message[3]
-                    ),200);
-        }
-
-        $post = $this->postmodel->get( $this->get('id') );
-
-        if($post){
-            $this->response(array(
-                   $this->status[1],"data"=> $post ), 200); // 200 being the HTTP response code
-        }else{
-            $this->response(array(
-                $this->status[2],$this->response_message[4]
-            ), 200);
-        }
-    }
 
     function by_get()
     {
 
         //    $this->response("hello world");
-        $searchColumn = "";
-        $searchTerm   = "";
+        $post_id =0;
+       // $this->get('post_id');
 
-      if(!$this->get('id') && !$this->get('name')  )
+        $posts =[];
+
+
+      if(!$this->get('post_id') )
         {
             $this->response(array(
                 $this->status[2],$this->response_message[3]), 400);
         }
-        /* */
 
-        if($this->get('id') ){
-            $searchColumn .="post_id";
-            $searchTerm = $this->get('id');
-        }
-        if($this->get('name')){
-            $searchColumn .="post_name";
-            $searchTerm = $this->get('name');
-        }
+        if($this->get('post_id') ){
 
-        $posts = $this->postmodel->get_where_like($searchColumn , $searchTerm, false  );
+            $post_id = $this->get('post_id');
+
+            $posts = $this->loadedpostmodel->get_loaded_post_by_post_id($post_id );
+
+        }
 
         $post_resp = ["data"=>$posts];
+
 
         if($posts){
             $this->response(array(

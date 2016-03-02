@@ -48,7 +48,7 @@
     </div>
 
 <script>
-    $(document).ready(function(){
+    $(function(){
         // Select first tab
       //  $('.nav-tabs a:first').tab('show');
         $(".nav-tabs a").click(function(e){
@@ -65,6 +65,9 @@
         var hash = window.location.hash;
         $('.nav-tabs a[href="' + hash + '"]').tab('show');
         //$('.nav-tabs a[href="#' + tabID + '"]').tab('show');
+
+        // Handler for .ready() called.
+
 
 
 

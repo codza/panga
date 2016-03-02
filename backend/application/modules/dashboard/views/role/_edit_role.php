@@ -67,7 +67,7 @@ $attributes = array('class' => 'form-horizontal');
 </div>
 
 <div>
-        <?php echo anchor('dashboard/accessmanagement/view_roles', 'Back To List ', 'title="Role list"'); ?>
+        <?php echo anchor('dashboard/rabc/view_roles', 'Back To List ', 'title="Role list"'); ?>
 </div>
 <script>
 

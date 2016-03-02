@@ -1,6 +1,7 @@
 <?php
 define('RESSOURCES_POSTS_URL',site_url("ressources/posts/"));
 define('RESSOURCES_POSTS_URL_LOAD_TO_POST',site_url("ressources/posts/async_loadpost/format/json"));
+define('RESSOURCES_LOADEDPOSTS_BY_URL',site_url("ressources/loadedposts/by/"));
 define('RESSOURCES_ROLEPERM_PERMISSION_URL',site_url('ressources/roleperms/permission_by/perm_name/%QUERY%/'));
 define('RESSOURCES_ROLEPERM_PERMS_BY_ROLE_ID_URL',site_url('ressources/roleperms/permission_by/role_id/'));
 define('RESSOURCES_ROLEPERM_ADD_PERM_TO_ROLE_URL',site_url('ressources/roleperms/async_addpermtorole/format/json'));
