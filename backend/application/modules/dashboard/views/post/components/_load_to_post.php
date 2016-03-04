@@ -59,10 +59,11 @@ $attributes = array('class' => 'form-horizontal');
 
         $('#loaded_posts_list tbody tr').load(RESSOURCES_LOADEDPOSTS_BY_URL ,function(resp){
 
-        ///    var var_resp = JSON.parse(resp);
+            var var_resp = JSON.parse(resp);
 
-            if (resp[0].status == "success") {
-                var items = resp[1].data;
+            if (var_resp[0].status == "success") {
+                var items = var_resp[1].data;
+                console.log(items);
                 load_post_list(items);
             }
         });
@@ -195,62 +196,65 @@ $attributes = array('class' => 'form-horizontal');
 
     /*********************************************/
 
-        function load_perm_list( items ){
-            $("#role_perm_list tbody tr").remove();
-            for( var i=0; i < items.length; i++) {
-                $("#role_perm_list tbody").append(
-                    //   "<div class=''style='border:2px solid #000;'>" +
-                    "<tr>"+
-                    "<td>"+items[i].sp_post_id+"</td>" +
-                    "<td>"+items[i].sp_post_name+"</td>"+
-                    "<td><a class='remove_permission' data-newline-rolepermid='"+items[i].sp_post_id+"' data-newline-tokensession='<?php echo $this->tokenSession; ?>' href='<?php echo base_url()."ressources/roleperms/async_removepermtorole/format/json"; ?>'> remove</a></td>"+
-                    "</tr>");
 
-            }
-
-            $(".remove_permission").click(function (e) {
-                e.preventDefault();
-                var role_perm_id = $(this).data("newlineRolepermid");
-                var tokenSession = $(this).data("newlineTokensession");
-                var url = $(this).attr('href');
-                var postData = new FormData();
-
-                postData.append("role_perm_id", role_perm_id);
-                postData.append("tk", tokenSession);
-                // postData.append("loaded_post_id", post_to_load_id);
-
-                $.ajax({
-                    datatype: "json",
-                    mimeType: "multipart/form-data",
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    method: "POST",
-                    url: url,
-                    data: postData
-                }).done(function (resp) {
-
-                    var Var_resp = JSON.parse(resp);
-
-                    if (Var_resp.status === "success") {
-
-                        var items = Var_resp.data;
-                        load_perm_list(items);
-                    }
-
-                });
-
-                console.log("********************************");
-
-            });
-
-
-
-        }
 
 
 
     /*********************************************/
     });
+
+    function load_post_list( items ){
+        $("#loaded_posts_list tbody tr").remove();
+        for( var i=0; i < items.length; i++) {
+            console.log(items[i]);
+            $("#loaded_posts_list tbody").append(
+                //   "<div class=''style='border:2px solid #000;'>" +
+                "<tr>"+
+                "<td>"+items[i].sp_post_id+"</td>" +
+                "<td>"+items[i].sp_post_name+"</td>"+
+                "<td><a class='remove_permission' data-newline-rolepermid='"+items[i].sp_post_id+"' data-newline-tokensession='<?php echo $this->tokenSession; ?>' href='<?php echo base_url()."ressources/roleperms/async_removepermtorole/format/json"; ?>'> remove</a></td>"+
+                "</tr>");
+
+        }
+
+/*        $(".remove_permission").click(function (e) {
+            e.preventDefault();
+            var role_perm_id = $(this).data("newlineRolepermid");
+            var tokenSession = $(this).data("newlineTokensession");
+            var url = $(this).attr('href');
+            var postData = new FormData();
+
+            postData.append("role_perm_id", role_perm_id);
+            postData.append("tk", tokenSession);
+            // postData.append("loaded_post_id", post_to_load_id);
+
+            $.ajax({
+                datatype: "json",
+                mimeType: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                method: "POST",
+                url: url,
+                data: postData
+            }).done(function (resp) {
+
+                var Var_resp = JSON.parse(resp);
+
+                if (Var_resp.status === "success") {
+
+                    var items = Var_resp.data;
+                    load_perm_list(items);
+                }
+
+            });
+
+            console.log("********************************");
+
+        });*/
+
+
+
+    }
 
 </script>
