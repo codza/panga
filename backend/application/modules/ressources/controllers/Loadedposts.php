@@ -32,7 +32,7 @@ class Loadedposts extends REST_Controller
         }
         if(is_null($tk)){
             $this->response(array(
-               $this->status[2],$this->response_message[1] 
+               $this->status[2],$this->response_message[1]
             ), 200);
         }
         $this->request_user = $this->usermodel->getUserByToken( $tk );
