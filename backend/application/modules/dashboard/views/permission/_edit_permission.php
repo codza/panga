@@ -16,6 +16,13 @@ $attributes = array('class' => 'form-horizontal');
   </div>
 
     <div class="form-group" >
+        <label class="col-md-2 control-label"  for="inputPermissionKey">Permission Key :</label>
+        <div class="col-md-2" >
+            <input type="text"  name="permissionkey" value="<?php echo $permission->perm_key;?>" id="inputPermissionKey" placeholder="Permission Key" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group" >
         <label class="col-md-2 control-label" for="inputPermissionDescription">Permission Description :</label>
     <div class="col-md-4" >
         <textarea  name="permissiondescription" id="inputPermissionDescription" placeholder="Permission Description" rows="3" class="form-control" ><?php echo $permission->perm_desc;?></textarea>
@@ -30,6 +37,6 @@ $attributes = array('class' => 'form-horizontal');
 <?php echo form_close();?>
 </fieldset>
     <div>
-        <?php  echo anchor('dashboard/accessmanagement/view_permissions', 'Back To List ', 'title="permission list"');?>
+        <?php  echo anchor('dashboard/rabc/view_permissions', 'Back To List ', 'title="permission list"');?>
     </div>
 </div>

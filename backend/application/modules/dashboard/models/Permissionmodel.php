@@ -19,6 +19,11 @@ class Permissionmodel extends MY_Model {
             'label' => 'Permession Name',
             'rules' => 'trim|is_unique[tbl_permission.perm_name]'
         ),
+		'PermissionKey' => array(
+			'field' => 'permissionkey',
+			'label' => 'Permession Key',
+			'rules' => 'trim|is_unique[tbl_permission.perm_key]'
+		),
         'PermissionDescription' => array(
             'field' => 'permissiondescription',
             'label' => 'Permession Description',

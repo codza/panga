@@ -70,9 +70,20 @@ class Rabc extends Admin_Controller {
             }
         }
         if ($_POST) {
+
+
             $rolename = $this->input->post('rolename', true);
+            $roleid = $this->input->post('roleid', true);
+            $this->data['role'] = $this->rolemodel->get($roleid);
+            $old_value_role_name = $this->data['role']->role_name;
             $rules = $this->rolemodel->rules;
-            $rules['RoleName']['rules'] = 'trim|required|edit_unique[tbl_role.role_name.' . $rolename . ']';
+
+            if ($rolename != $old_value_role_name) {
+                $rules['RoleName']['rules'] = 'trim|required|is_unique[tbl_role.role_name]';
+            } else {
+                $rules['RoleName']['rules'] = 'trim|required';
+            }
+
             $this->load->library('form_validation');
             $this->form_validation->set_rules($rules);
             if ($this->form_validation->run() == FALSE) {
@@ -81,8 +92,8 @@ class Rabc extends Admin_Controller {
                 $datatoupdate = array(
                     "role_name" => $rolename
                 );
-                $data = $this->rolemodel->save($datatoupdate, $id);
-                $this->data['role'] = $this->rolemodel->get($id);
+                $this->rolemodel->save($datatoupdate, $roleid);
+                $this->data['role'] = $this->rolemodel->get($roleid);
                 redirect('dashboard/rabc/view_roles');
             }/* */
         }
@@ -98,14 +109,17 @@ class Rabc extends Admin_Controller {
     public function add_permission() {
         $datatoinsert = null;
         $permname = '';
+        $permkey = '';
         $permdesc = '';
         if ($_POST) {
             
             $permname = $this->input->post('permissionname', true);
+            $permkey = $this->input->post('permissionkey', true);
             $permdesc = $this->input->post('permissiondescription', true);
             
             $datatoinsert = array(
                 'perm_name' => $permname,
+                'perm_key' => put_underscore($permkey),
                 'perm_desc' => $permdesc
             );
             $this->data["datatoinsert"] = $datatoinsert;
@@ -123,6 +137,7 @@ class Rabc extends Admin_Controller {
         } else {
             $datatoinsert = array(
                 'perm_name' => $permname,
+                'perm_key' => $permkey,
                 'perm_desc' => $permdesc
             );
             $this->data["datatoinsert"] = $datatoinsert;
@@ -144,10 +159,27 @@ class Rabc extends Admin_Controller {
             
             $permid = $this->input->post('permissionid', true);
             $permname = $this->input->post('permissionname', true);
+            $permkey = $this->input->post('permissionkey', true);
             $permdesc = $this->input->post('permissiondescription', true);
             
             $rules = $this->permissionmodel->rules;
-            $rules['PermissionName']['rules'] = 'trim|required|edit_unique[tbl_permission.perm_name.' . $permname . ']';
+
+            $permission = $this->permissionmodel->get($permid);
+
+            $old_value_pem_name = trim($permission->perm_name);
+            $old_value_pem_key = trim($permission->perm_key);
+            if ($permname != $old_value_pem_name) {
+                $rules['PermissionName']['rules'] = 'trim|required|is_unique[tbl_permission.perm_name]';
+            } else {
+                $rules['PermissionName']['rules'] = 'trim|required';
+            }
+            if ($permkey != $old_value_pem_key) {
+                $rules['PermissionKey']['rules'] = 'trim|required|is_unique[tbl_permission.perm_key]';
+            } else {
+                $rules['PermissionKey']['rules'] = 'trim|required';
+            }
+
+          //  $rules['PermissionName']['rules'] = 'trim|required|edit_unique[tbl_permission.perm_name.' . $permname . ']';
             $this->load->library('form_validation');
             $this->form_validation->set_rules($rules);
             if ($this->form_validation->run() == FALSE) {
@@ -155,11 +187,12 @@ class Rabc extends Admin_Controller {
             } else {
                 $datatoupdate = array(
                     'perm_name' => $permname,
+                    'perm_key' => put_underscore($permkey),
                     'perm_desc' => $permdesc
                 );
-                $this->permissionmodel->save($datatoupdate, $id);
+                $this->permissionmodel->save($datatoupdate, $permid);
 
-                $this->data['permission'] = $this->permissionmodel->get($id);
+                $this->data['permission'] = $this->permissionmodel->get($permid);
                 redirect('dashboard/rabc/view_permissions');
             }/* */
         }

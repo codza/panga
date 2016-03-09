@@ -117,7 +117,11 @@ $attributes = array('class' => 'form-horizontal');
 
                 if (var_resp[0].status == "success") {
                     var items = var_resp[1].data;
-                   load_perm_list(items);
+
+
+                       load_perm_list(items);
+
+
                 }
         });
     });
@@ -166,17 +170,24 @@ $attributes = array('class' => 'form-horizontal');
 
     function load_perm_list( items ){
         $("#role_perm_list tbody tr").remove();
-        for( var i=0; i < items.length; i++) {
+        if( items !== undefined && items !== "No Result" ){
+            for( var i=0; i < items.length; i++) {
+                $("#role_perm_list tbody").append(
+                    //   "<div class=''style='border:2px solid #000;'>" +
+                    "<tr>"+
+                    "<td>"+items[i].role_perm_id+"</td>" +
+                    "<td>"+items[i].perm_name+"</td>"+
+                    "<td><a class='remove_permission' data-newline-rolepermid='"+items[i].role_perm_id+"' data-newline-tokensession='<?php echo $this->tokenSession; ?>' href='<?php echo base_url()."ressources/roleperms/async_removepermtorole/format/json"; ?>'> remove</a></td>"+
+                    "</tr>");
+
+            }
+        }else{
             $("#role_perm_list tbody").append(
-                //   "<div class=''style='border:2px solid #000;'>" +
-                "<tr>"+
-                "<td>"+items[i].role_perm_id+"</td>" +
-                "<td>"+items[i].perm_name+"</td>"+
-                "<td><a class='remove_permission' data-newline-rolepermid='"+items[i].role_perm_id+"' data-newline-tokensession='<?php echo $this->tokenSession; ?>' href='<?php echo base_url()."ressources/roleperms/async_removepermtorole/format/json"; ?>'> remove</a></td>"+
+                "<tr>" +
+                "<td colspan='3'> No permission attached </td>" +
                 "</tr>");
 
         }
-
         $(".remove_permission").click(function (e) {
             e.preventDefault();
             var role_perm_id = $(this).data("newlineRolepermid");
@@ -202,7 +213,6 @@ $attributes = array('class' => 'form-horizontal');
                 var Var_resp = JSON.parse(resp);
 
                 if (Var_resp.status === "success") {
-
                     var items = Var_resp.data;
                     load_perm_list(items);
                 }
