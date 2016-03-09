@@ -14,6 +14,10 @@ class Migration_Permission_Table extends CI_Migration {
                 'type' => 'VARCHAR',
                 'constraint' => '250',
             ),
+            'perm_key' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '250',
+            ),
             'perm_desc' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '250',

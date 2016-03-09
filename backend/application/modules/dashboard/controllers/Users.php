@@ -213,19 +213,10 @@ class Users extends Admin_Controller {
         echo "<br>############<br>";
       //  array_key_exists('first', $perm);
 
-        function perm_exits($PermissionsArray, $permToSearch){
-            foreach ($PermissionsArray as $perm)
-            {
-                if (strcmp( strtolower(trim($perm['perm_name'])), strtolower (trim($permToSearch)))==0) {
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-        }
 
-        if(perm_exits($perm ,'deleteuser') ){
-        echo "exits";
+
+        if(perm_exits($perm ,'edit_user') ){
+            echo "exits";
         }
         else{
             echo "doesn't exits";
