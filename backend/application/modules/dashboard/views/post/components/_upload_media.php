@@ -8,7 +8,7 @@ $attributes = array('class' => 'form-horizontal');
     <div class="form-group" >
         <label class="col-md-2 control-label" for="inputContent">Post Media :</label>
         <div class="col-md-8">
-            <input type="file" class="form-control" id="inputfile" name="userfile"  />
+            <input type="file" class="input-file" id="inputfile" name="userfile"  />
         </div>
     </div>
     <div class="form-group" >

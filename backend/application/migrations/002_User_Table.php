@@ -44,6 +44,16 @@ class Migration_User_Table extends CI_Migration {
                 'type' => 'int',
                 'constraint' => '2',
             ),
+            'is_active' => array(
+                'type' => 'INT',
+                'constraint' => 1,
+                'DEFAULT'=>1
+            ),
+            'is_member' => array(
+                'type' => 'INT',
+                'constraint' => 1,
+                'DEFAULT'=>0
+            ),
             'created_date' => array(
                 'type' => 'DATETIME'
             ),

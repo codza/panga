@@ -87,12 +87,8 @@ $attributes = array('class' => 'form-horizontal');
                 method: "GET",
                 url: URL+"/by/name/"+inputSearchPost+"/tk/"+tk+"/format/json"
             }).done(function( resp ) {
-             //   console.log(resp.posts);
-            //    console.log(resp.posts);
-               // console.log(resp.status);
 
                 var items = resp[1].data;
-                //.html(): Clean HTML inside and append
 
                 for( var i=0; i < items.length; i++) {
                     $("#result").html(
@@ -138,15 +134,15 @@ $attributes = array('class' => 'form-horizontal');
                                     "<tr>" +
                                     "<td>" + items[i].sp_post_id + "</td>" +
                                     "<td>" + items[i].sp_post_name + "</td>" +
-                                    "<td><a class='remove_too_post' data-newline-loadedid='" + items[i].loaded_id + "' data-newline-tokensession='' href='<?php echo base_url() . "ressources/posts/async_unlaod/tk/" . $this->tokenSession . "loaded_id/";?>/format/json' >remove</a></td>" +
+                                    "<td><a class='unload_post' data-newline-loadedid='" + items[i].loaded_id + "' data-newline-tokensession='<?php echo $this->tokenSession; ?>' href='<?php echo base_url()."ressources/Loadedposts/async_unloadloadpost/format/json"; ?>' >remove</a></td>" +
                                     "</tr>");
-
                             }
+
+                            unloadPostOnClick();
 
                         }
 
                     });
-
                     console.log("********************************");
 
                 });
@@ -179,8 +175,11 @@ $attributes = array('class' => 'form-horizontal');
                 "</tr>");
 
         }
+        unloadPostOnClick();
+    }
 
-       $(".unload_post").click(function (e) {
+    function unloadPostOnClick(){
+        $(".unload_post").click(function (e) {
             e.preventDefault();
             var loaded_id = $(this).data("newlineLoadedid");
             var tokenSession = $(this).data("newlineTokensession");
@@ -188,23 +187,11 @@ $attributes = array('class' => 'form-horizontal');
 
             console.log("["+loaded_id +"****"+tokenSession+"****"+url+"]");
 
-          var postData = new FormData();
+            var postData = new FormData();
 
             postData.append("loaded_id", loaded_id);
             postData.append("tk", tokenSession); /* */
-
-
-
-           var data = {
-               loaded_id: loaded_id,
-               tokenSession:tokenSession
-           };
-
-           console.log(data);
-
-
-
-           console.log("********************************");
+            console.log("********************************");
             $.ajax({
                 datatype: "json",
                 mimeType: "multipart/form-data",
@@ -215,24 +202,15 @@ $attributes = array('class' => 'form-horizontal');
                 url: url,
                 data: postData
             }).done(function (resp) {
-
                 var Var_resp = JSON.parse(resp);
-
                 if (Var_resp.status === "success") {
-
                     var items = Var_resp.data;
                     load_post_list(items);
                 }
-
             });
             console.log("********************************");
 
-            /* */
-
         });
-
-
-
     }
 
 </script>
