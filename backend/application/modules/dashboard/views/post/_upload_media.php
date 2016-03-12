@@ -1,6 +1,6 @@
 <?php echo $error;?>
 
-<?php echo form_open_multipart('upload/do_upload');?>
+<?php echo form_open_multipart('dashboard/posts/upload_media');?>
 
     <input type="file" name="userfile" size="20" />
 
@@ -8,6 +8,6 @@
 
     <input type="submit" value="upload" />
 
-    </form>
+<?php echo form_close();?>
 
 

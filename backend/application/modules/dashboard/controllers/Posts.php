@@ -238,10 +238,9 @@ class Posts extends Admin_Controller {
 
     public function upload_media()
     {
-
         $stl = 15;
 
-        $config['upload_path'] = './media/images';
+        $config['upload_path'] =  $_SERVER['DOCUMENT_ROOT'].'/media/images/';
         $config['allowed_types'] = 'gif|jpg|png';
         $media_code = RandomStringId($stl);
 
@@ -249,27 +248,27 @@ class Posts extends Admin_Controller {
         $config['max_width']  = '1920';
         $config['max_height']  = '1200';
         $config['file_name'] = $media_code;
+        var_dump($config);
 
 
 
+       /// $this->load->library('upload', $config);
 
-        $this->load->library('upload', $config);
+        $this->load->library('upload');
+        $this->upload->initialize($config);
 
 
-        if ( ! $this->upload->do_upload())
+        if ( ! $this->upload->do_upload("userfile"))
         {
             $error = array('error' => $this->upload->display_errors());
+            var_dump($error);
 
         }else{
 
             $data = array('upload_data' => $this->upload->data());
             $user_id = $this->input->post('userid',true);
             $post_id = $this->input->post('postid',true);
-           // var_dump($data);
 
-        /**/
-
-        //    $this->load->library('image_lib');
             $config_manip['image_library'] = 'gd2';
             $config_manip['source_image']  = $data['upload_data']['file_path']."/".$data['upload_data']['file_name'];
             $config_manip['new_image']     =  $data['upload_data']['file_path']."/thumb/".$data['upload_data']['file_name'];
@@ -280,57 +279,40 @@ class Posts extends Admin_Controller {
             $config_manip['width']  = 150;
             $config_manip['height'] = 150;
 
+            echo "we are here";
 
 
-            $this->load->library('image_lib', $config_manip);
+
+    /*        $this->load->library('image_lib', $config_manip);
             if (!$this->image_lib->resize()) {
                 echo $this->image_lib->display_errors();
             }else{
 
 
 
-            $this->load->model('mediamodel');
+                $this->load->model('mediamodel');
 
-        //     $media_file =  $this->mediamodel->get_by(array('tbl_media.post_id'=>$post_id),true);
+                $media_code = $data['upload_data']['raw_name'];
+                $media_type = $data['upload_data']['file_type'];
+                $media_ext  = $data['upload_data']['file_ext'];
+                $media_size = $data['upload_data']['file_size'];
+                $media_name = basename($data['upload_data']['client_name'],$media_ext);
 
-             //   var_dump($media_file);
-
-/*                if($media_file != null){
-                    $media_url = "./media/images/".get_media_url($media_file, FALSE);
-                    $thumb_media_url  = "./media/images/thumb/".get_media_url($media_file, TRUE);
-
-                        if (unlink($thumb_media_url)){
-
-                        }
-                        if(unlink($media_url)){
-
-                        }
-
-                }*/
-
-            $media_code = $data['upload_data']['raw_name'];
-            $media_type = $data['upload_data']['file_type'];
-            $media_ext  = $data['upload_data']['file_ext'];
-            $media_size = $data['upload_data']['file_size'];
-            $media_name = basename($data['upload_data']['client_name'],$media_ext);
-
-            $media_to_save = array(
-                'post_id'=>$post_id,
-                'media_code'=>$media_code,
-                'user_id'=>$user_id,
-                'media_name'=>$media_name,
-                'media_type'=>$media_type,
-                'media_ext'=>$media_ext,
-                'media_size'=>$media_size
-            );
-            /*    if($media_file != null){
-                    $this->mediamodel->save($media_to_save,$media_file->media_id );
-                }else{*/
-                    $this->mediamodel->save($media_to_save);
-            //    }
-            }
+                $media_to_save = array(
+                    'post_id'=>$post_id,
+                    'media_code'=>$media_code,
+                    'user_id'=>$user_id,
+                    'media_name'=>$media_name,
+                    'media_type'=>$media_type,
+                    'media_ext'=>$media_ext,
+                    'media_size'=>$media_size
+                );
+                $this->mediamodel->save($media_to_save);
+            }*/
         }
-        redirect('dashboard/posts','refresh');
+   //     redirect('dashboard/posts','refresh');
+
+
     }
     public function edit_other_settings()
     {
