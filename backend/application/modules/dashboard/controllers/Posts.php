@@ -240,56 +240,60 @@ class Posts extends Admin_Controller {
     {
         $stl = 15;
 
-        $config['upload_path'] =  $_SERVER['DOCUMENT_ROOT'].'/media/images/';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $media_code = RandomStringId($stl);
+        $is_image=false;
+        $is_audio=false;
+        $can_save=true;
 
+        $raw_file = $_FILES["userfile"];
+        $raw_file_name = $_FILES['userfile']['name'];
+        $ext = pathinfo($raw_file_name, PATHINFO_EXTENSION);
+        $file_uplaod_path ="";
         $config['max_size']	= '0';
-        $config['max_width']  = '1920';
-        $config['max_height']  = '1200';
+
+        if(strcmp($ext,"mp3")==0 || strcmp( $ext,"wav")==0 ){
+            $file_uplaod_path='./media/audios/';
+            $is_audio=true;
+
+        }else{
+            $file_uplaod_path='./media/images/';
+            $config['max_width']  = '1920';
+            $config['max_height']  = '1200';
+            $is_image =true;
+        }
+
+        $config['upload_path'] =  $file_uplaod_path;
+        $config['allowed_types'] = 'gif|jpg|jpeg|jpe|png|mp3|wav';
+        $media_code = RandomStringId($stl);
         $config['file_name'] = $media_code;
-        var_dump($config);
-
-
-
-       /// $this->load->library('upload', $config);
 
         $this->load->library('upload');
         $this->upload->initialize($config);
 
 
-        if ( ! $this->upload->do_upload("userfile"))
-        {
+        if ( ! $this->upload->do_upload("userfile")) {
             $error = array('error' => $this->upload->display_errors());
-            var_dump($error);
-
         }else{
+             $data = array('upload_data' => $this->upload->data());
+             $user_id = $this->input->post('userid',true);
+             $post_id = $this->input->post('postid',true);
 
-            $data = array('upload_data' => $this->upload->data());
-            $user_id = $this->input->post('userid',true);
-            $post_id = $this->input->post('postid',true);
+             if($is_image){
+                 $config_manip['image_library'] = 'gd2';
+                 $config_manip['source_image']  = $data['upload_data']['file_path']."/".$data['upload_data']['file_name'];
+                 $config_manip['new_image']     =  $data['upload_data']['file_path']."/thumb/".$data['upload_data']['file_name'];
+                 $config_manip['create_thumb']  = TRUE;
+                 $config_manip['maintain_ratio'] = TRUE;
+                 $config_manip['thumb_marker'] = '_thumb';
+                 $config_manip['width']= 50;
+                 $config_manip['height'] = 150;
 
-            $config_manip['image_library'] = 'gd2';
-            $config_manip['source_image']  = $data['upload_data']['file_path']."/".$data['upload_data']['file_name'];
-            $config_manip['new_image']     =  $data['upload_data']['file_path']."/thumb/".$data['upload_data']['file_name'];
-            $config_manip['create_thumb']  = TRUE;
-            $config_manip['maintain_ratio'] = TRUE;
-            $config_manip['thumb_marker'] = '_thumb';
+                $this->load->library('image_lib', $config_manip);
+                if(!$this->image_lib->resize()){
+                    echo $this->image_lib->display_errors();
+                }
+             }
 
-            $config_manip['width']  = 150;
-            $config_manip['height'] = 150;
-
-            echo "we are here";
-
-
-
-    /*        $this->load->library('image_lib', $config_manip);
-            if (!$this->image_lib->resize()) {
-                echo $this->image_lib->display_errors();
-            }else{
-
-
-
+             if($can_save){
                 $this->load->model('mediamodel');
 
                 $media_code = $data['upload_data']['raw_name'];
@@ -308,9 +312,11 @@ class Posts extends Admin_Controller {
                     'media_size'=>$media_size
                 );
                 $this->mediamodel->save($media_to_save);
-            }*/
+            }
+
         }
-   //     redirect('dashboard/posts','refresh');
+
+        redirect('dashboard/posts','refresh');
 
 
     }
