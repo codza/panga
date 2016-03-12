@@ -141,7 +141,6 @@ class Posts extends Admin_Controller {
 
             if(isset($_POST['updatecontent'])){
                 $posttitle = $this->input->post('posttitle',true);
-                $postslug = $this->input->post('postslug',true);
                 $parentid = $this->input->post('parentid',true);
                 $post_id = $this->input->post('postid',true);
                 $posttemplate = $this->input->post('posttemplate',true);
@@ -162,7 +161,6 @@ class Posts extends Admin_Controller {
                     "post_type"=>$posttype,
                     "is_active"=>$postisactive,
                     "post_template"=>$posttemplate,
-                    "post_slug"=>put_underscore($postslug),
                     "post_title"=>$posttitle,
                     "post_name"=>$postname,
                     "publication_date"=>$publicationdate,
@@ -177,12 +175,14 @@ class Posts extends Admin_Controller {
 
                 $post_id = $this->input->post('postid',true);
                 $user_id = $this->input->post('userid',true);
+                $postslug = $this->input->post('postslug',true);
                 $post_keywords = $this->input->post('postkeywords',true);
                 $post_description = $this->input->post('postdescription',true);
 
                 $datatoupdate = array(
                     "user_id"=>$user_id,
                     "post_keywords"=>$post_keywords,
+                    "post_slug"=>put_underscore($postslug),
                     "post_description"=>$post_description
 
                 );

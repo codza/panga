@@ -9,6 +9,8 @@ $this->load->view('web/components/media');
         <div class="col-md-12 rhu_posts " >
 
             <?php foreach ($posts as $post): ?>
+
+
                 <div class="row rhu_post_card">
                     <div class="col-md-3">
                         <div class="thumbnail rhu_thumbnail pull-right ">

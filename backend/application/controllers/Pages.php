@@ -29,24 +29,24 @@ class Pages extends Frontend_Controller{
 
             $this->data['posts'] =  $this->postmodel->get_most_recent_post();
 
-            $this->data['post'] = $this->postmodel->get_by(array(
+            $this->data['main_post'] = $this->postmodel->get_by(array(
                 'tbl_post.post_slug' => (string) $this->uri->segment(1),
                 'tbl_post.is_active' => 1
             ), TRUE);
 
-            if($this->data['post'] != null ){
+            if($this->data['main_post'] != null ){
 
-                if($this->data['post']->post_slug=="" ){
+                if($this->data['main_post']->post_slug=="" ){
 
-                    if( $this->data['post']->post_template == "welcome_page"){
+                    if( $this->data['main_post']->post_template == "welcome_page"){
 
                         $this->data["posts"]= $this->postmodel->get_most_recent_post();
 
                     }else{
 
-                        $this->data['related_category'] = $this->data['post']->category_name;
+                        $this->data['related_category'] = $this->data['main_post']->category_name;
                         $this->data['posts'] = $this->postmodel->get_by(
-                            array("cat.category_name" =>$this->data['post']->category_name  )
+                            array("cat.category_name" =>$this->data['main_post']->category_name  )
                             ,
                             FALSE);
 
@@ -55,23 +55,23 @@ class Pages extends Frontend_Controller{
 
                 }else{
 
-                    if( $this->data['post']->post_template != "secondary_page"){
+                    if( $this->data['main_post']->post_template != "secondary_page"){
                         $this->data['posts'] = $this->postmodel->get_by(
-                            array("cat.category_name" =>$this->data['post']->post_slug  )
+                            array("cat.category_name" =>$this->data['main_post']->post_slug  )
                             ,
                             FALSE);
                     }else{
                         $this->data['posts'] = $this->postmodel->get_by(
-                            array("cat.category_name" =>$this->data['post']->category_name  )
+                            array("cat.category_name" =>$this->data['main_post']->category_name  )
                             ,
                             FALSE);
                     }
 
-                    $this->data['related_category'] =$this->data['post']->category_name;
+                    $this->data['related_category'] =$this->data['main_post']->category_name;
 
                 }
             }
-          //  $this->data['related_category'] =$this->data['post']->category_name;
+          //  $this->data['related_category'] =$this->data['main_post']->category_name;
 
 
         }else{
@@ -79,24 +79,24 @@ class Pages extends Frontend_Controller{
             $this->data['related_category'] = (string) $this->uri->segment(1);
         //    var_dump($this->data['related_category']);
 
-            $this->data['post'] = $this->postmodel->get_by( array(
-                'category_name' => (string) $this->uri->segment(1),
+            $this->data['main_post'] = $this->postmodel->get_by( array(
+                'cat.category_name' => (string) $this->uri->segment(1),
                 'tbl_post.post_slug' =>(string)$this->uri->segment(2) ),
                 TRUE);
 
 
-            if($this->data['post'] !== null){
+            if($this->data['main_post'] !== null){
 
-                if(strcasecmp($this->data['post']->post_template,"welcome_page")==0 ){
+                if(strcasecmp($this->data['main_post']->post_template,"welcome_page")==0 ){
                     $this->data['posts'] = $this->postmodel->get_most_recent_post();
             //        var_dump("test 2");
 
                 }else{
                     $this->data['posts'] = $this->postmodel->get_by( array(
-                        'category_name'=>(string) $this->uri->segment(1)
+                        'cat.category_name'=>(string) $this->uri->segment(1)
                     ),FALSE);
                //     var_dump("test 3");
-               //     var_dump($this->data['post']->post_template);
+               //     var_dump($this->data['main_post']->post_template);
 
                 }
 
@@ -104,21 +104,22 @@ class Pages extends Frontend_Controller{
         }
     //    var_dump($total_uri_segment);
 
-    //    count($this->data['post']) || show_404(current_url());
-        if(count($this->data['post'])==0){
+    //    count($this->data['main_post']) || show_404(current_url());
+        if(count($this->data['main_post'])==0){
 
-            //$post_template  = '_' . $this->data['post']->post_template;
+            //$post_template  = '_' . $this->data['main_post']->post_template;
             $this->data['subview'] ='errors/custom_error_404';
 
         }else{
-         //   $method = '_' . $this->data['post']->post_template;
-            $post_template  = '_' . $this->data['post']->post_template;
+         //   $method = '_' . $this->data['main_post']->post_template;
+            $post_template  = '_' . $this->data['main_post']->post_template;
             $this->data['subview'] ='web/layouts/'.$post_template;
 
         }
 
         $this->load->view('web/_main_layout', $this->data);
 	}
+
         function test(){
             $this->data['menu'] = $this->postmodel->get_nested();
             var_dump($this->data['menu']);

@@ -6,10 +6,10 @@ $this->load->view('web/components/media');
 <div class="container rhu-post-container">
 		<div class="col-md-9 rhu_post_view">
 
-				<h1><?php echo e($post->post_title); ?></h1>
+				<h1><?php echo e($main_post->post_title); ?></h1>
 				<div class="text-justify" >
 
-					<?php echo html_entity_decode($post->post_content); ?>
+					<?php echo html_entity_decode($main_post->post_content); ?>
 
 				</div>
 

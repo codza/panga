@@ -177,6 +177,11 @@ class Postmodel extends MY_Model {
             'label' => 'User',
             'rules' => 'trim|required'
         ),
+        'PostSlug' => array(
+            'field' => 'postslug',
+            'label' => 'Post Slug',
+            'rules' => 'trim|max_length[100]|url_title|callback__unique_slug'
+        ),
         'PostKeywords' => array(
             'field' => 'postkeywords',
             'label' => 'Post Keywords',
