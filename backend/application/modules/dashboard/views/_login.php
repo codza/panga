@@ -16,7 +16,7 @@
       <form class="form-signin" method="POST" action="<?php echo current_url();?> ">
 
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+        <input type="text" name="username" class="form-control" value="<?php echo $login_username; ?>" placeholder="Username" required autofocus>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
         <div class="checkbox">
         <label>

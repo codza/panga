@@ -5,6 +5,7 @@ class Mediamodel extends MY_Model {
 	protected $_primary_key = 'media_id';
 	protected $_primary_filter = 'intval';
 	protected $_order_by = 'created_date';
+	protected $_asc_or_desc = "DESC";
 	protected $_rules = array();
 	protected $_timestamps = TRUE;
 

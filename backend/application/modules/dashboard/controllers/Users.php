@@ -152,14 +152,17 @@ class Users extends Admin_Controller {
 
     public function login() {
         $userAuth = null;
+        $this->data["login_username"]="";
 
         if ($_POST) {
+
             $username = $this->input->post('username', true);
             $password = $this->input->post('password', true);
             $userAuth = $this->usermodel->getUserTokenByUsernameAndPassword($username, $password);
 
             if ($userAuth == null) {
-                $this->data["errors"] = array("username" => "error", "password" => "error");
+             ///   $this->data["errors"] = array("username" => "error", "password" => "error");
+                $this->data["login_username"]=$username;
             } else {
                 $this->session->set_userdata("user_info", $userAuth);
                 redirect('dashboard/users', 'refresh');

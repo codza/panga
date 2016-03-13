@@ -5,6 +5,7 @@ class MY_Model extends CI_Model {
 	protected $_primary_key = 'id';
 	protected $_primary_filter = 'intval';
 	protected $_order_by = '';
+	protected $_asc_or_desc ="ASC";
 	public $rules = array();
 	protected $_timestamps = FALSE;
 	
@@ -26,7 +27,7 @@ class MY_Model extends CI_Model {
 			$method = 'result';
 		}
 		if ( strlen($this->_order_by) > 1 ) {
-			$this->db->order_by($this->_table_name.".".$this->_order_by);
+			$this->db->order_by($this->_table_name.".".$this->_order_by,$this->_asc_or_desc);
 		}
 		return $this->db->get($this->_table_name)->$method();
 	}
